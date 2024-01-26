@@ -11,5 +11,11 @@ config_version=5
 [application]
 
 config/name="jester-game"
+config/tags=PackedStringArray("jam")
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=2
+window/stretch/mode="canvas_items"
