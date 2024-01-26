@@ -1,9 +1,6 @@
 class_name Game
 extends Node
 
-# Tracks which setup is currently active and pending resolution
-var current_setup: String = ""
-
 var round_number: int = 0
 var max_round_number: int = 7
 

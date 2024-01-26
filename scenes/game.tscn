@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3ekjjhiqy5iy"]
+[gd_scene load_steps=4 format=3 uid="uid://c3ekjjhiqy5iy"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_gmfm1"]
 [ext_resource type="PackedScene" uid="uid://bnla5m7oa6rcr" path="res://scenes/card_slot.tscn" id="2_3wt2b"]
+[ext_resource type="PackedScene" uid="uid://onajvaufej6p" path="res://scenes/card.tscn" id="3_aadjc"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
 
 [node name="CardSlot" parent="." instance=ExtResource("2_3wt2b")]
+position = Vector2(584, 236)
+
+[node name="CardSlot2" parent="." instance=ExtResource("2_3wt2b")]
+position = Vector2(864, 237)
+
+[node name="Card" parent="." instance=ExtResource("3_aadjc")]
+position = Vector2(206, 193)
 
 [connection signal="slot_highlighted" from="CardSlot" to="." method="_on_card_slot_highlighted"]
 [connection signal="slot_unhighlighted" from="CardSlot" to="." method="_on_card_slot_unhighlighted"]
