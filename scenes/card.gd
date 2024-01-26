@@ -1,4 +1,8 @@
+class_name Card
 extends Area2D
+
+signal card_dragged(this: Card)
+signal card_released(this: Card)
 
 var card_id
 var is_hovering = false

@@ -10,7 +10,7 @@ shader_parameter/line_color = Color(0.239216, 0.262745, 0.839216, 1)
 shader_parameter/line_thickness = 4.439
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7kx2"]
-size = Vector2(78, 108)
+size = Vector2(77, 108)
 
 [node name="Card" type="Area2D"]
 script = ExtResource("1_ylb3u")
