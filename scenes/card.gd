@@ -1,16 +1,17 @@
-extends Node
+extends Area2D
 
 var card_id
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+var is_mouse_hovering = false
 
 func load_card_data(card_id):
 	pass
+
+func _process(delta):
+	if is_mouse_hovering == true && Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		position = get_global_mouse_position()
+
+func _on_mouse_entered():
+		is_mouse_hovering = true
+
+func _on_mouse_exited():
+	is_mouse_hovering = false
