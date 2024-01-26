@@ -16,14 +16,16 @@ func _process(delta):
 		position = get_global_mouse_position()
 
 func _on_mouse_entered():
-		is_hovering = true
+	is_hovering = true
 
-func _on_mouse_exit():
+func _on_mouse_exited():
 	is_hovering = false
 
 func _input(event):
 	if Input.is_action_just_pressed("click"):
+		print("pressed")
 		if is_hovering:
 			is_selected = true
 	elif Input.is_action_just_released("click"):
+		print("released")
 		is_selected = false
