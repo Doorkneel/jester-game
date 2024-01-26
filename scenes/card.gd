@@ -1,16 +1,21 @@
 class_name Card
-extends Node
+extends Area2D
 
 signal card_dragged(this: Card)
 signal card_released(this: Card)
 
 var card_id
-
-func _ready():
-	pass # Replace with function body.
-
-func _process(delta):
-	pass
+var is_mouse_hovering = false
 
 func load_card_data(card_id):
 	pass
+
+func _process(delta):
+	if is_mouse_hovering == true && Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		position = get_global_mouse_position()
+
+func _on_mouse_entered():
+	is_mouse_hovering = true
+
+func _on_mouse_exited():
+	is_mouse_hovering = false
