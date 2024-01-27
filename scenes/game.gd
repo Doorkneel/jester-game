@@ -74,8 +74,12 @@ func advance_round() -> void:
 		rounds_label.text = str(rounds_remaining)
 		
 		for slot in stage_slots + court_slots + commoner_slots:
+			var card_in_slot = slot.contents
+			slot.contents = null
+			
 			# TODO take card effects
-			pass
+			
+			card_in_slot.queue_free()
 		
 		# TODO take king card effect
 
@@ -106,6 +110,7 @@ func draw_card() -> void:
 	card_id = "test_card"
 	
 	var new_card: Card = card_scene.instantiate()
+	hand.append(new_card)
 	new_card.pos_in_hand = len(hand) - 1
 	new_card.position = card_spawn.position
 	new_card.card_id = card_id
@@ -114,7 +119,6 @@ func draw_card() -> void:
 	new_card.connect("card_picked_up", self._on_card_picked_up)
 	new_card.connect("card_played_to_slot", self._on_card_played_to_slot)
 	
-	hand.append(new_card)
 	layout_hand()
 	add_child(new_card)
 
