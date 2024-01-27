@@ -10,7 +10,7 @@ signal card_played_to_slot(this: Card)
 @onready var rules_text: Label = $RulesText as Label
 
 var card_data_loc = "res://cards/"
-var card_art_loc = "res://assets/"
+var card_art_loc = "res://assets/art/"
 
 var card_id = "test_card"
 var card_data

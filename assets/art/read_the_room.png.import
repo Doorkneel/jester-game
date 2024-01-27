@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjiktvitm1b0w"
-path="res://.godot/imported/heckle.png-6656bed35fb2eb0559a248d7d4dd68c0.ctex"
+uid="uid://cuo2py33e1vyu"
+path="res://.godot/imported/read_the_room.png-18cfcddd4f050ac711d9366583bf3f34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/heckle.png"
-dest_files=["res://.godot/imported/heckle.png-6656bed35fb2eb0559a248d7d4dd68c0.ctex"]
+source_file="res://assets/art/read_the_room.png"
+dest_files=["res://.godot/imported/read_the_room.png-18cfcddd4f050ac711d9366583bf3f34.ctex"]
 
 [params]
 

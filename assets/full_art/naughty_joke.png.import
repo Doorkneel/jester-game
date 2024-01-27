@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwf1raxck12nl"
-path="res://.godot/imported/quip.png-8822b7cdc4ab7f9b39f77460e4fe8519.ctex"
+uid="uid://da0bj5mtpamc1"
+path="res://.godot/imported/naughty_joke.png-df32ea29b19d8a5aca526434dba0fa73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/quip.png"
-dest_files=["res://.godot/imported/quip.png-8822b7cdc4ab7f9b39f77460e4fe8519.ctex"]
+source_file="res://assets/full_art/naughty_joke.png"
+dest_files=["res://.godot/imported/naughty_joke.png-df32ea29b19d8a5aca526434dba0fa73.ctex"]
 
 [params]
 

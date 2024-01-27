@@ -1,5 +1,5 @@
 {
-	"id" : "test_card",
+	"id" : "audience_participation",
 	"name" : "Test Card",
 	"type" : "utility",
 	"rules_text" : "Lorem ipsum sit dolor",
@@ -10,4 +10,4 @@
 			"courtFavour" : -10
 		}
 	]
-}
+}	

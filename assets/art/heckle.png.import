@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbmpi0ee6wesf"
-path="res://.godot/imported/stage_fright.png-a97014bab21359cf579f0d1b4d129169.ctex"
+uid="uid://b7lvh8xo45xy5"
+path="res://.godot/imported/heckle.png-9d0a7380a64bfda55ecc1c2d7ed21efa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage_fright.png"
-dest_files=["res://.godot/imported/stage_fright.png-a97014bab21359cf579f0d1b4d129169.ctex"]
+source_file="res://assets/art/heckle.png"
+dest_files=["res://.godot/imported/heckle.png-9d0a7380a64bfda55ecc1c2d7ed21efa.ctex"]
 
 [params]
 
