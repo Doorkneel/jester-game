@@ -74,14 +74,21 @@ func advance_round() -> void:
 		rounds_label.text = str(rounds_remaining)
 		
 		for slot in stage_slots + court_slots + commoner_slots:
-			var card_in_slot = slot.contents
-			slot.contents = null
+			var top_card = slot.contents.pop_back()
+			if not top_card: continue
 			
 			# TODO take card effects
+			pass
 			
-			card_in_slot.queue_free()
+			top_card.queue_free()
+			while len(slot.contents) > 0:
+				var c = slot.contents.pop_back()
+				c.queue_free()
 		
 		# TODO take king card effect
+		pass
+		
+		card_draw_timer.start()
 
 func adjust_attitude(audience, favour) -> void:
 	if audience == "court":
@@ -123,15 +130,16 @@ func draw_card() -> void:
 	add_child(new_card)
 
 func _on_card_played_to_slot(card: Card) -> void:
-	hand.remove_at(card.pos_in_hand)
-	card.pos_in_hand = -1
-	for i in range(len(hand)): hand[i].pos_in_hand = i
-	layout_hand()
+	if card.pos_in_hand >= 0:
+		hand.remove_at(card.pos_in_hand)
+		card.pos_in_hand = -1
+		layout_hand()
 
 func layout_hand() -> void:
 	for i in range(len(hand)):
 		var width_proportion: float = 1 - exp(-len(hand) / 6.0)
 		hand_pos.progress_ratio = 0.5 - 0.5 * width_proportion + width_proportion * (i + 0.5) / len(hand)
+		hand[i].pos_in_hand = i
 		hand[i].desired_position = hand_pos.global_position
 		hand[i].desired_rotation = hand_pos.rotation
 

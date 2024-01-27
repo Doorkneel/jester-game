@@ -96,7 +96,7 @@ func _on_slot_hovered(id: int, slot: CardSlot) -> void:
 	# do not unhighlight unless currently-highlighted slot is requesting it;
 	# this avoids a race condition where we enter another slot before the first
 	# emits the signal to be unhighlighted
-	if not slot and id != highlighted_slot.get_instance_id(): return
+	if not slot and highlighted_slot and id != highlighted_slot.get_instance_id(): return
 	
 	# TODO do some logic to check whether card can be placed here
 	highlighted_slot = slot
@@ -105,5 +105,5 @@ func play_to_slot(slot: CardSlot) -> void:
 	desired_position = slot.global_position
 	desired_rotation = slot.global_rotation
 	slot.contents.append(self)
-	interactable = false
+	#interactable = false
 	card_played_to_slot.emit(self)
