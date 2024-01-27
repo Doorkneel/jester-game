@@ -1,7 +1,7 @@
 class_name CardSlot
 extends Area2D
 
-signal slot_hovered(this: CardSlot)
+signal slot_hovered(id: int, this: CardSlot)
 
 @export_enum("Stage", "Commoners", "Court", "King") var location: int
 
@@ -18,10 +18,10 @@ func _ready() -> void:
 		3: sprite.modulate = Color(0.8, 0, 1)
 
 func _on_mouse_entered() -> void:
-	slot_hovered.emit(self)
+	slot_hovered.emit(self.get_instance_id(), self)
 
 func _on_mouse_exited() -> void:
-	slot_hovered.emit(null)
+	slot_hovered.emit(self.get_instance_id(), null)
 
 func highlight() -> void:
 	# TODO visually highlight slot; told to do so by the card being dragged
