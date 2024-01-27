@@ -27,9 +27,9 @@ var rounds_remaining: int = 7
 
 @onready var king_slot = $King/King as CardSlot
 
-# crowd attitudes (range between -1 and 1)
-var commoner_attitude: float = 0
-var court_attitudes: float = 0
+# crowd attitudes (range between -40 and 40)
+var commoner_attitude: int = 0
+var court_attitude: int = 0
 
 # current humour level
 var humour: int = 5
@@ -66,3 +66,22 @@ func advance_round() -> void:
 			pass
 		
 		# TODO take king card effect
+
+func adjust_attitude(audience, favour) -> void:
+	if audience == "court":
+		court_attitude = clamp(court_attitude + favour, -50, 50)
+	else: # audience == "commoner"
+		commoner_attitude = clamp(commoner_attitude + favour, -50, 50)
+
+func get_audience_cards(audience) -> Array[String]:
+	var attitude: int = court_attitude if audience == "court" else commoner_attitude
+	var sentiment: String = "GOOD" if attitude >= 0 else "BAD"
+	
+	var cards: Array[String] = []
+	for i in range(2):
+		if randf() < ease_in_out(abs(attitude) / 40): cards.append(sentiment)
+		else: cards.append("NONE")
+	return cards
+
+func ease_in_out(x: float) -> float:
+	return 2 * x * x if 0 < 0.5 else 1 - pow(-2 * x + 2, 2) / 2
