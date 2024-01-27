@@ -83,11 +83,13 @@ func _input(_event) -> void:
 	if Input.is_action_just_pressed("click"):
 		if being_hovered and not card_being_dragged and interactable:
 			being_dragged = true
+			z_index = 1000
 			card_picked_up.emit(self)
 			card_being_dragged = self
 	elif Input.is_action_just_released("click"):
 		if being_dragged:
 			being_dragged = false
+			z_index = 0
 			card_released.emit(self)
 			card_being_dragged = null
 			

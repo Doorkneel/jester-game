@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3ekjjhiqy5iy"]
+[gd_scene load_steps=13 format=3 uid="uid://c3ekjjhiqy5iy"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_gmfm1"]
 [ext_resource type="PackedScene" uid="uid://bnla5m7oa6rcr" path="res://scenes/card_slot.tscn" id="2_3wt2b"]
-[ext_resource type="PackedScene" uid="uid://onajvaufej6p" path="res://scenes/card.tscn" id="3_aadjc"]
 [ext_resource type="FontFile" uid="uid://c3syvr3xbve25" path="res://assets/Magic Sound.ttf" id="5_2d1mq"]
 [ext_resource type="FontFile" uid="uid://3qnfqecml1m" path="res://assets/Skincake.ttf" id="5_x7nl2"]
 
@@ -45,11 +44,24 @@ shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
 shadow_size = 3
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip60r"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02dbk"]
+bg_color = Color(1, 0.858824, 0.298039, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="Curve2D" id="Curve2D_7rpl5"]
 _data = {
 "points": PackedVector2Array(-225.018, 46.298, 225.018, -46.298, 90, 644, -248.315, -53.4812, 248.315, 53.4812, 981, 646)
 }
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrlsg"]
+size = Vector2(801, 123.5)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
@@ -99,14 +111,6 @@ metadata/_edit_group_ = true
 [node name="King" parent="King" instance=ExtResource("2_3wt2b")]
 location = 3
 
-[node name="Card" parent="." instance=ExtResource("3_aadjc")]
-visible = false
-position = Vector2(582, 532)
-
-[node name="Card2" parent="." instance=ExtResource("3_aadjc")]
-visible = false
-position = Vector2(614, 570)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Rounds" type="Label" parent="CanvasLayer"]
@@ -149,6 +153,9 @@ offset_left = 41.0
 offset_top = 398.0
 offset_right = 86.0
 offset_bottom = 580.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ip60r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_02dbk")
+value = 5.0
 fill_mode = 3
 show_percentage = false
 
@@ -167,6 +174,12 @@ rotation = -0.20292
 
 [node name="CardSpawn" type="Marker2D" parent="."]
 position = Vector2(1254, 464)
+
+[node name="HandHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandHitbox"]
+position = Vector2(551, 598)
+shape = SubResource("RectangleShape2D_jrlsg")
 
 [connection signal="pressed" from="CanvasLayer/EndRound" to="." method="advance_round"]
 [connection signal="timeout" from="CardDrawTimer" to="." method="_on_card_draw_timer_timeout"]

@@ -36,7 +36,7 @@ var rounds_remaining: int = 7
 # current deck and hand
 var deck: Array[String] = []
 var hand: Array[Card] = []
-var cards_left_to_draw: int = 5
+var cards_to_draw: int = 5
 
 func _ready() -> void:
 	# initialize UI
@@ -88,7 +88,7 @@ func advance_round() -> void:
 		# TODO take king card effect
 		pass
 		
-		card_draw_timer.start()
+		draw_card()
 
 func adjust_attitude(audience, favour) -> void:
 	if audience == "court":
@@ -145,5 +145,5 @@ func layout_hand() -> void:
 
 func _on_card_draw_timer_timeout() -> void:
 	draw_card()
-	cards_left_to_draw -= 1
-	if cards_left_to_draw > 0: card_draw_timer.start()
+	cards_to_draw -= 1
+	if cards_to_draw > 0: card_draw_timer.start()
