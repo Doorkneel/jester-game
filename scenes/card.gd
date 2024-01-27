@@ -4,8 +4,7 @@ extends Area2D
 @onready var card_art: Sprite2D = $Art as Sprite2D
 @onready var card_name: Label = $Name as Label
 @onready var rules_text: Label = $RulesText as Label
-
-signal card_dragged(this: Card)
+signal card_picked_up(this: Card)
 signal card_released(this: Card)
 
 var card_data_loc = "res://cards/"
@@ -14,15 +13,22 @@ var card_art_loc = "res://assets/"
 var card_id = "test_card"
 var card_data
 
-var is_hovering = false
-var is_selected = false
+# Track card being dragged across multiple card instances
+static var card_being_dragged: Card
+var highlighted_slot: CardSlot
 
-func _ready():
-	load_card()
+# Current interaction
+var being_hovered = false
+var being_dragged = false
 
-func _process(delta):
-	if is_selected:
-		position = get_global_mouse_position()
+# Where to return if let go
+var pos_in_hand: int = -1
+var origin_slot: CardSlot = null
+
+# Target position & rotation for animation
+var target_position: Vector2
+const slide_speed: float = 0.6
+const snap_strength: float = 0.7
 
 func load_card():
 	var file_name = card_data_loc + card_id + ".json"
@@ -36,15 +42,54 @@ func load_card():
 	card_name.text = card_data["name"]
 	rules_text.text = card_data["rules_text"]
 
-func _on_mouse_entered():
-	is_hovering = true
+func _ready() -> void:
+	target_position = position
+	load_card()
 
-func _on_mouse_exit():
-	is_hovering = false
+func _process(_delta) -> void:
+	if being_dragged:
+		if highlighted_slot:
+			target_position = snap_strength * highlighted_slot.global_position + (1 - snap_strength) * get_global_mouse_position()
+			rotation = highlighted_slot.global_rotation
+		else:
+			target_position = get_global_mouse_position()
+			rotation = 0
+		
+	# move towards target position
+	var pos_delta = target_position - position
+	if pos_delta.length() < slide_speed: position = target_position
+	else: position += pos_delta * slide_speed
 
-func _input(event):
+func _on_mouse_entered() -> void:
+	being_hovered = true
+
+func _on_mouse_exited() -> void:
+	being_hovered = false
+
+func _input(_event) -> void:
 	if Input.is_action_just_pressed("click"):
-		if is_hovering:
-			is_selected = true
+		if being_hovered and not card_being_dragged:
+			being_dragged = true
+			card_picked_up.emit(self)
+			card_being_dragged = self
 	elif Input.is_action_just_released("click"):
-		is_selected = false
+		if being_dragged:
+			being_dragged = false
+			card_released.emit(self)
+			card_being_dragged = null
+			
+			if highlighted_slot:
+				play_to_slot(highlighted_slot)
+			else:
+				# TODO add logic to return to hand using 'pos_in_hand'
+				pass
+
+func _on_slot_hovered(slot: CardSlot) -> void:
+	# TODO do some logic to check whether card can be placed here
+	highlighted_slot = slot
+
+func play_to_slot(slot: CardSlot) -> void:
+	target_position = slot.global_position
+	rotation = slot.global_rotation
+	slot.contents.append(self)
+	origin_slot = slot

@@ -1,20 +1,29 @@
 class_name CardSlot
 extends Area2D
 
-signal slot_highlighted(this: CardSlot)
-signal slot_unhighlighted
+signal slot_hovered(this: CardSlot)
+
+@export_enum("Stage", "Commoners", "Court", "King") var location: int
 
 @onready var sprite: Sprite2D = $Sprite as Sprite2D
 
-var active: bool = false
+var contents: Array[Card] = []
 
 func _ready() -> void:
-	pass # Replace with function body.
+	# TODO set visuals depending on location
+	match location:
+		0: sprite.modulate = Color(0.6, 0.6, 0)
+		1: sprite.modulate = Color(0.5, 0.3, 0.4)
+		2: sprite.modulate = Color(0, 0.6, 0.6)
+		3: sprite.modulate = Color(0.8, 0, 1)
 
 func _on_mouse_entered() -> void:
-	# TODO highlight slot
-	slot_highlighted.emit(self)
+	slot_hovered.emit(self)
 
 func _on_mouse_exited() -> void:
-	# TODO unhighlight slot
-	slot_unhighlighted.emit()
+	slot_hovered.emit(null)
+
+func highlight() -> void:
+	# TODO visually highlight slot; told to do so by the card being dragged
+	# if that card may be placed here
+	pass

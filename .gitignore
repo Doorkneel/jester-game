@@ -2,4 +2,4 @@
 .godot/
 
 # Meld originals
-*.gd.orig
+*.orig
