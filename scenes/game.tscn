@@ -163,7 +163,7 @@ curve = SubResource("Curve2D_7rpl5")
 
 [node name="HandPos" type="PathFollow2D" parent="Path2D"]
 position = Vector2(90, 644)
-rotation = -0.202921
+rotation = -0.20292
 
 [node name="CardSpawn" type="Marker2D" parent="."]
 position = Vector2(1254, 464)

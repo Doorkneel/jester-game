@@ -37,8 +37,7 @@ func load_card():
 	var file_name = card_data_loc + card_id + ".json"
 	var file = FileAccess.open(file_name, FileAccess.READ)
 	var json_object = JSON.new()
-	var parse_err = json_object.parse(file.get_as_text())
-	
+	var _parse_err = json_object.parse(file.get_as_text())
 	card_data = json_object.get_data()
 	
 	card_art.texture = load(card_art_loc + card_id + ".png")

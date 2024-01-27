@@ -99,14 +99,22 @@ func ease_in_out(x: float) -> float:
 	return 2 * x * x if 0 < 0.5 else 1 - pow(-2 * x + 2, 2) / 2
 
 func draw_card() -> void:
+	if len(deck) <= 0: return # TODO indicate empty deck
+	var card_id = deck.pop_back()
+	
+	# TODO TEMPORARY
+	card_id = "test_card"
+	
 	var new_card: Card = card_scene.instantiate()
+	new_card.pos_in_hand = len(hand) - 1
+	new_card.position = card_spawn.position
+	new_card.card_id = card_id
+	
 	new_card.connect("card_released", self._on_card_released)
 	new_card.connect("card_picked_up", self._on_card_picked_up)
 	new_card.connect("card_played_to_slot", self._on_card_played_to_slot)
 	
 	hand.append(new_card)
-	new_card.pos_in_hand = len(hand) - 1
-	new_card.position = card_spawn.position
 	layout_hand()
 	add_child(new_card)
 
