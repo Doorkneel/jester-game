@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://onajvaufej6p"]
+[gd_scene load_steps=6 format=3 uid="uid://onajvaufej6p"]
 
 [ext_resource type="Script" path="res://scenes/card.gd" id="1_ylb3u"]
 [ext_resource type="Texture2D" uid="uid://eaw108ahxl8p" path="res://assets/art/crowd_work.png" id="2_8hwsp"]
+[ext_resource type="JSON" path="res://cards/card_list.json" id="2_blmkk"]
 [ext_resource type="Texture2D" uid="uid://qh3emu5ej85e" path="res://assets/frames/commoner_frame.png" id="3_qdvpb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7kx2"]
@@ -9,6 +10,7 @@ size = Vector2(100, 140)
 
 [node name="Card" type="Area2D" groups=["cards"]]
 script = ExtResource("1_ylb3u")
+card_list_json = ExtResource("2_blmkk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 4)
