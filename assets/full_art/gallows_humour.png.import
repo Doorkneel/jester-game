@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfv1i73wffc2q"
-path="res://.godot/imported/audience_participation.png-faebb8909b00dd0e8a3897730adfaa62.ctex"
+uid="uid://w0vrsfv5njcj"
+path="res://.godot/imported/gallows_humour.png-4bb6f90886c595a2c366eec46f4d4119.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/audience_participation.png"
-dest_files=["res://.godot/imported/audience_participation.png-faebb8909b00dd0e8a3897730adfaa62.ctex"]
+source_file="res://assets/full_art/gallows_humour.png"
+dest_files=["res://.godot/imported/gallows_humour.png-4bb6f90886c595a2c366eec46f4d4119.ctex"]
 
 [params]
 

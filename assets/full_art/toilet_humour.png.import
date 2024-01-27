@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w0vrsfv5njcj"
-path="res://.godot/imported/gallows_humour.png-64595bb3bc087a34afa1e69b0225b1f7.ctex"
+uid="uid://cgpswlsi1s38o"
+path="res://.godot/imported/toilet_humour.png-3792d5e94ea4ee2d3c44bbf01e2421d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gallows_humour.png"
-dest_files=["res://.godot/imported/gallows_humour.png-64595bb3bc087a34afa1e69b0225b1f7.ctex"]
+source_file="res://assets/full_art/toilet_humour.png"
+dest_files=["res://.godot/imported/toilet_humour.png-3792d5e94ea4ee2d3c44bbf01e2421d4.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 {
-	"id" : "test_card",
+	"id" : "audience_participation",
 	"name" : "Test Card",
-	"type" : "utility",
+	"type" : "court",
 	"rules_text" : "Lorem ipsum sit dolor",
 	"effects" : [
 		{
@@ -10,4 +10,4 @@
 			"courtFavour" : -10
 		}
 	]
-}
+}	

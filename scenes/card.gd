@@ -6,11 +6,13 @@ signal card_released(this: Card)
 signal card_played_to_slot(this: Card)
 
 @onready var card_art: Sprite2D = $Art as Sprite2D
+@onready var card_frame: Sprite2D = $Frame as Sprite2D
 @onready var card_name: Label = $Name as Label
 @onready var rules_text: Label = $RulesText as Label
 
 var card_data_loc = "res://cards/"
-var card_art_loc = "res://assets/"
+var card_art_loc = "res://assets/art/"
+var card_frame_loc = "res://assets/frames/"
 
 var card_id = "test_card"
 var card_data
@@ -41,6 +43,7 @@ func load_card():
 	card_data = json_object.get_data()
 	
 	card_art.texture = load(card_art_loc + card_id + ".png")
+	card_frame.texture = load(card_frame_loc + card_data["type"] + "_frame.png")
 	card_name.text = card_data["name"]
 	rules_text.text = card_data["rules_text"]
 
