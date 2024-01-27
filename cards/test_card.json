@@ -1,6 +1,7 @@
 {
 	"id" : "test_card",
 	"name" : "Test Card",
+	"type" : "utility"
 	"rules_text" : "Lorem ipsum sit dolor",
 	"effects" : [
 		{

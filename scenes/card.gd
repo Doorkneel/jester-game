@@ -1,8 +1,9 @@
 class_name Card
 extends Area2D
 
-@onready var sprite: Sprite2D = $Art as Sprite2D
-@onready var name_label: Label = $Name as Label
+@onready var card_art: Sprite2D = $Art as Sprite2D
+@onready var card_name: Label = $Name as Label
+@onready var rules_text: Label = $RulesText as Label
 
 signal card_dragged(this: Card)
 signal card_released(this: Card)
@@ -31,8 +32,9 @@ func load_card():
 	
 	card_data = json_object.get_data()
 	
-	sprite.texture = load(card_art_loc + card_id + ".png")
-	name_label.text = card_data["name"]
+	card_art.texture = load(card_art_loc + card_id + ".png")
+	card_name.text = card_data["name"]
+	rules_text.text = card_data["rules_text"]
 
 func _on_mouse_entered():
 	is_hovering = true
