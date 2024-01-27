@@ -1,8 +1,8 @@
 {
 	"id" : "audience_participation",
-	"name" : "Test Card",
-	"type" : "court",
-	"rules_text" : "Lorem ipsum sit dolor",
+	"name" : "Crowd Work",
+	"type" : "commoner",
+	"rules_text" : "Add 5 comedy",
 	"effects" : [
 		{
 			"comedy" : 10,
@@ -10,4 +10,4 @@
 			"courtFavour" : -10
 		}
 	]
-}	
+}
