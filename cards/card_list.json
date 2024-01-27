@@ -3,7 +3,7 @@
 		"name" : "Crowd Work",
 		"type" : "commoner",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -13,7 +13,7 @@
 		"name" : "Gallows Humor",
 		"type" : "commoner",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -23,17 +23,18 @@
 		"name" : "Heckle",
 		"type" : "commoner",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"courtFavour" : -10,
+			"quality" : "bad"
 		}
 	},
 	"naughty_joke" : {
 		"name" : "Naughty",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -43,17 +44,18 @@
 		"name" : "Offense",
 		"type" : "court",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"courtFavour" : -10,
+			"quality" : "bad"
 		}
 	},
 	"quip" : {
 		"name" : "Quip",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -63,7 +65,7 @@
 		"name" : "Read the room",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -73,7 +75,7 @@
 		"name" : "Roast",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -83,7 +85,7 @@
 		"name" : "Setup",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
@@ -93,17 +95,18 @@
 		"name" : "Stage Fright",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"courtFavour" : -10,
+			"quality" : "bad"
 		}
 	},
 	"toilet_humour" : {
 		"name" : "Toilet Humour",
 		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
-		"effects" : {
+		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10
