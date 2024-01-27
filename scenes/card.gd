@@ -92,7 +92,12 @@ func _input(_event) -> void:
 				play_to_slot(highlighted_slot)
 				highlighted_slot = null
 
-func _on_slot_hovered(slot: CardSlot) -> void:
+func _on_slot_hovered(id: int, slot: CardSlot) -> void:
+	# do not unhighlight unless currently-highlighted slot is requesting it;
+	# this avoids a race condition where we enter another slot before the first
+	# emits the signal to be unhighlighted
+	if not slot and id != highlighted_slot.get_instance_id(): return
+	
 	# TODO do some logic to check whether card can be placed here
 	highlighted_slot = slot
 
