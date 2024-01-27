@@ -19,6 +19,7 @@ var card_id = "test_card"
 var card_data
 
 var pos_in_hand: int = -1
+var current_slot: CardSlot
 
 # Track card being dragged across multiple card instances
 static var card_being_dragged: Card
@@ -95,12 +96,8 @@ func _input(_event) -> void:
 			card_released.emit(self)
 			card_being_dragged = null
 			
-			if highlighted_slot:
-				play_to_slot(highlighted_slot)
-				highlighted_slot = null
-			elif should_return_to_hand:
-				card_returned_to_hand.emit(self)
-				should_return_to_hand = false
+			if highlighted_slot: play_to_slot(highlighted_slot)
+			elif should_return_to_hand: play_to_slot(null)
 
 func _on_slot_hovered(id: int, slot: CardSlot) -> void:
 	# do not unhighlight unless currently-highlighted slot is requesting it;
@@ -118,8 +115,18 @@ func _on_hand_hitbox_exited() -> void:
 	should_return_to_hand = false
 
 func play_to_slot(slot: CardSlot) -> void:
-	desired_position = slot.global_position
-	desired_rotation = slot.global_rotation
-	slot.contents.append(self)
-	#interactable = false
-	card_played_to_slot.emit(self)
+	# remove card from old slot
+	if current_slot: current_slot.contents.pop_front()
+	current_slot = slot
+	
+	if slot:
+		# add card to new slot
+		desired_position = slot.global_position
+		desired_rotation = slot.global_rotation
+		slot.contents.append(self)
+		card_played_to_slot.emit(self)
+		highlighted_slot = null
+	else:
+		# return card to hand
+		card_returned_to_hand.emit(self)
+		should_return_to_hand = false
