@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_gmfm1"]
 [ext_resource type="PackedScene" uid="uid://bnla5m7oa6rcr" path="res://scenes/card_slot.tscn" id="2_3wt2b"]
-[ext_resource type="JSON" path="res://cards/commoner_cards.json" id="2_gg5yp"]
 [ext_resource type="FontFile" uid="uid://c3syvr3xbve25" path="res://assets/Magic Sound.ttf" id="5_2d1mq"]
+[ext_resource type="PackedScene" uid="uid://4txe3eyg25bs" path="res://scenes/sounds.tscn" id="5_2q4lb"]
 [ext_resource type="FontFile" uid="uid://3qnfqecml1m" path="res://assets/Skincake.ttf" id="5_x7nl2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qgtx"]
@@ -66,8 +66,6 @@ size = Vector2(801, 123.5)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
-commoner_json = ExtResource("2_gg5yp")
-court_json = ExtResource("2_gg5yp")
 
 [node name="Stage" type="Node2D" parent="."]
 position = Vector2(578, 366)
@@ -163,7 +161,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="CardDrawTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.18
 one_shot = true
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -183,6 +181,8 @@ position = Vector2(1254, 464)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandHitbox"]
 position = Vector2(551, 598)
 shape = SubResource("RectangleShape2D_jrlsg")
+
+[node name="Sounds" parent="." instance=ExtResource("5_2q4lb")]
 
 [connection signal="pressed" from="CanvasLayer/EndRound" to="." method="advance_round"]
 [connection signal="timeout" from="CardDrawTimer" to="." method="_on_card_draw_timer_timeout"]

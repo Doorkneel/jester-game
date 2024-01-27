@@ -9,6 +9,7 @@ extends Node
 @onready var card_spawn = $CardSpawn as Marker2D
 @onready var hand_pos = $Path2D/HandPos as PathFollow2D
 @onready var hand_hitbox = $HandHitbox as Area2D
+@onready var sounds = $Sounds as Sounds
 
 @onready var stage_slots = [$Stage/Stage1, $Stage/Stage2, $Stage/Stage3] as Array[CardSlot]
 @onready var court_slots = [$Court/Court1, $Court/Court2] as Array[CardSlot]
@@ -17,8 +18,8 @@ extends Node
 
 @export var commoner_json: JSON
 @export var court_json: JSON
-@onready var court_cards_data = court_json.get_data()
-@onready var commoner_cards_data = commoner_json.get_data()
+@onready var court_cards_data = court_json.get_data() if court_json else null
+@onready var commoner_cards_data = commoner_json.get_data() if commoner_json else null
 
 const card_scene = preload("res://scenes/card.tscn")
 
@@ -69,6 +70,7 @@ func _on_card_released(card: Card) -> void:
 	hand_hitbox.disconnect("mouse_exited", card._on_hand_hitbox_exited)
 
 func _on_card_picked_up(card: Card) -> void:
+	sounds.card_draw()
 	for slot in slots:
 		slot.connect("slot_hovered", card._on_slot_hovered)
 	hand_hitbox.connect("mouse_entered", card._on_hand_hitbox_entered)
@@ -103,6 +105,7 @@ func advance_round() -> void:
 		# TODO take king card effect
 		pass
 		
+		sounds.laugh(randf()) # TODO adjust magnitude based on success
 		draw_card()
 
 func adjust_attitude(audience, favour) -> void:
@@ -140,8 +143,10 @@ func draw_card() -> void:
 	
 	layout_hand()
 	add_child(new_card)
+	sounds.card_draw()
 
 func _on_card_played_to_slot(card: Card) -> void:
+	sounds.card_play()
 	if card.pos_in_hand >= 0:
 		hand.remove_at(card.pos_in_hand)
 		card.pos_in_hand = -1

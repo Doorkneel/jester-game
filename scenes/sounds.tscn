@@ -1,6 +1,72 @@
-[gd_scene load_steps=2 format=3 uid="uid://4txe3eyg25bs"]
+[gd_scene load_steps=17 format=3 uid="uid://4txe3eyg25bs"]
 
 [ext_resource type="Script" path="res://scenes/sounds.gd" id="1_f26rj"]
+[ext_resource type="AudioStream" uid="uid://x4ns56m5f0k1" path="res://assets/sounds/smallest.mp3" id="2_shoa8"]
+[ext_resource type="AudioStream" uid="uid://babsfcvhp44pd" path="res://assets/sounds/small.mp3" id="3_fiyj1"]
+[ext_resource type="AudioStream" uid="uid://ccfpx61mgokmr" path="res://assets/sounds/medium.mp3" id="4_poiuq"]
+[ext_resource type="AudioStream" uid="uid://b8jfbblgx76pw" path="res://assets/sounds/large.mp3" id="5_iylec"]
+[ext_resource type="AudioStream" uid="uid://c2f3u4v141gfn" path="res://assets/sounds/huge.mp3" id="6_k1ax6"]
+[ext_resource type="AudioStream" uid="uid://clpcavjoqpmmf" path="res://assets/sounds/badumtss.wav" id="7_eiuin"]
+[ext_resource type="AudioStream" uid="uid://bpv77go2cxi4n" path="res://assets/sounds/card.wav" id="8_naj2b"]
+[ext_resource type="AudioStream" uid="uid://duwjidqcpf8gy" path="res://assets/sounds/play.wav" id="9_1yo6g"]
+[ext_resource type="AudioStream" uid="uid://5wbjyiv6bysy" path="res://assets/sounds/boo.wav" id="10_d8hr0"]
+[ext_resource type="AudioStream" uid="uid://c5smmugsk28ma" path="res://assets/sounds/chattering.wav" id="11_nos28"]
+[ext_resource type="AudioStream" uid="uid://drb0socm3jti2" path="res://assets/sounds/music.mp3" id="12_ueh38"]
+[ext_resource type="AudioStream" uid="uid://xvgb6fe4sc2p" path="res://assets/sounds/gasp_neutral.wav" id="13_jb0go"]
+[ext_resource type="AudioStream" uid="uid://bmv72swbwqeep" path="res://assets/sounds/gasp_surprise.wav" id="14_iwaic"]
+[ext_resource type="AudioStream" uid="uid://dgr70fwbbwm5" path="res://assets/sounds/gasp_worry.wav" id="15_0r0ls"]
+[ext_resource type="AudioStream" uid="uid://bqsha8ehb85rw" path="res://assets/sounds/gasp_shock.wav" id="16_xd02u"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_f26rj")
+
+[node name="Smallest" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_shoa8")
+
+[node name="Small" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fiyj1")
+
+[node name="Medium" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_poiuq")
+
+[node name="Large" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_iylec")
+
+[node name="Huge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_k1ax6")
+
+[node name="Badumtss" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_eiuin")
+
+[node name="Play" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_1yo6g")
+volume_db = -1.753
+max_polyphony = 10
+
+[node name="Boo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_d8hr0")
+
+[node name="Chattering" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_nos28")
+autoplay = true
+
+[node name="Card" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_naj2b")
+max_polyphony = 10
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ueh38")
+volume_db = -4.0
+autoplay = true
+
+[node name="GaspNeutral" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_jb0go")
+
+[node name="GaspSurprise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_iwaic")
+
+[node name="GaspWorry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_0r0ls")
+
+[node name="GaspShock" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_xd02u")
