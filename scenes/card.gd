@@ -1,8 +1,14 @@
 class_name Card
 extends Area2D
 
+@onready var sprite: Sprite2D = $Art as Sprite2D
+@onready var name_label: Label = $Name as Label
+
 signal card_dragged(this: Card)
 signal card_released(this: Card)
+
+var card_data_loc = "res://cards/"
+var card_art_loc = "res://assets/"
 
 var card_id = "test_card"
 var card_data
@@ -11,18 +17,22 @@ var is_hovering = false
 var is_selected = false
 
 func _ready():
-	load_card_data()
+	load_card()
 
 func _process(delta):
 	if is_selected:
 		position = get_global_mouse_position()
 
-func load_card_data():
-	var file_name = "res://cards/" + card_id + ".json"
+func load_card():
+	var file_name = card_data_loc + card_id + ".json"
 	var file = FileAccess.open(file_name, FileAccess.READ)
 	var json_object = JSON.new()
 	var parse_err = json_object.parse(file.get_as_text())
+	
 	card_data = json_object.get_data()
+	
+	sprite.texture = load(card_art_loc + card_id + ".png")
+	name_label.text = card_data["name"]
 
 func _on_mouse_entered():
 	is_hovering = true

@@ -9,13 +9,21 @@ size = Vector2(77, 108)
 [node name="Card" type="Area2D"]
 script = ExtResource("1_ylb3u")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Art" type="Sprite2D" parent="."]
 position = Vector2(-7.62939e-06, -1.52588e-05)
 scale = Vector2(0.433333, 0.433333)
 texture = ExtResource("2_dpha7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h7kx2")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -35.0
+offset_top = -53.0
+offset_right = 9.0
+offset_bottom = -27.0
+text = "Temp
+"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
