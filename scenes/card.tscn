@@ -11,8 +11,8 @@ size = Vector2(100, 140)
 script = ExtResource("1_ylb3u")
 
 [node name="Art" type="Sprite2D" parent="."]
-position = Vector2(1, -19)
-scale = Vector2(0.447619, 0.447619)
+position = Vector2(1, -20.5)
+scale = Vector2(0.447619, 0.461905)
 texture = ExtResource("2_fpw6x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,8 +35,8 @@ text = "Temp
 "
 
 [node name="Frame" type="Sprite2D" parent="."]
-position = Vector2(1, 4.05309)
-scale = Vector2(0.442478, 0.443374)
+position = Vector2(1, 1.55309)
+scale = Vector2(0.442478, 0.459197)
 texture = ExtResource("3_qdvpb")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

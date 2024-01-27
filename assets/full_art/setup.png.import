@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bus0yvh77ess7"
-path="res://.godot/imported/roast.png-93d6231fad2958bade0dee6c55db77ce.ctex"
+uid="uid://c0hxu57puasql"
+path="res://.godot/imported/setup.png-cdf6aaee310aafc764d5bf4487fb4ece.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/roast.png"
-dest_files=["res://.godot/imported/roast.png-93d6231fad2958bade0dee6c55db77ce.ctex"]
+source_file="res://assets/full_art/setup.png"
+dest_files=["res://.godot/imported/setup.png-cdf6aaee310aafc764d5bf4487fb4ece.ctex"]
 
 [params]
 

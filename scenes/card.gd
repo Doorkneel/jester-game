@@ -12,7 +12,7 @@ signal card_played_to_slot(this: Card)
 var card_data_loc = "res://cards/"
 var card_art_loc = "res://assets/art/"
 
-var card_id = "audience_participation"
+var card_id = "test_card"
 var card_data
 
 var pos_in_hand: int = -1

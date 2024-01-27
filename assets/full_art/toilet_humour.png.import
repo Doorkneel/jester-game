@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnoeiiac8j6kd"
-path="res://.godot/imported/card_back.jpeg-5f033445d4587ffdd3a78462a2040aeb.ctex"
+uid="uid://cgpswlsi1s38o"
+path="res://.godot/imported/toilet_humour.png-3792d5e94ea4ee2d3c44bbf01e2421d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card_back.jpeg"
-dest_files=["res://.godot/imported/card_back.jpeg-5f033445d4587ffdd3a78462a2040aeb.ctex"]
+source_file="res://assets/full_art/toilet_humour.png"
+dest_files=["res://.godot/imported/toilet_humour.png-3792d5e94ea4ee2d3c44bbf01e2421d4.ctex"]
 
 [params]
 

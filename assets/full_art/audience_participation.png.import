@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbmpi0ee6wesf"
-path="res://.godot/imported/stage_fright.png-a97014bab21359cf579f0d1b4d129169.ctex"
+uid="uid://bfv1i73wffc2q"
+path="res://.godot/imported/audience_participation.png-592126ca4900b84a64b1bd93c565a2b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage_fright.png"
-dest_files=["res://.godot/imported/stage_fright.png-a97014bab21359cf579f0d1b4d129169.ctex"]
+source_file="res://assets/full_art/audience_participation.png"
+dest_files=["res://.godot/imported/audience_participation.png-592126ca4900b84a64b1bd93c565a2b6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dngwtbk4p6ntg"
-path="res://.godot/imported/read_the_room.png-4ad6442c67972f673e4cac1db9928014.ctex"
+uid="uid://w0vrsfv5njcj"
+path="res://.godot/imported/gallows_humour.png-4bb6f90886c595a2c366eec46f4d4119.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/read_the_room.png"
-dest_files=["res://.godot/imported/read_the_room.png-4ad6442c67972f673e4cac1db9928014.ctex"]
+source_file="res://assets/full_art/gallows_humour.png"
+dest_files=["res://.godot/imported/gallows_humour.png-4bb6f90886c595a2c366eec46f4d4119.ctex"]
 
 [params]
 
