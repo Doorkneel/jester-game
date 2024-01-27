@@ -4,7 +4,14 @@ extends Area2D
 signal card_picked_up(this: Card)
 signal card_released(this: Card)
 
-var card_id: String
+@onready var sprite: Sprite2D = $Art as Sprite2D
+@onready var name_label: Label = $Name as Label
+
+var card_data_loc = "res://cards/"
+var card_art_loc = "res://assets/"
+
+var card_id = "test_card"
+var card_data
 
 # Track card being dragged across multiple card instances
 static var card_being_dragged: Card
@@ -23,12 +30,20 @@ var target_position: Vector2
 const slide_speed: float = 0.6
 const snap_strength: float = 0.7
 
-func load_card_data(id) -> void:
-	card_id = id
-	# TODO load card data
+func load_card():
+	var file_name = card_data_loc + card_id + ".json"
+	var file = FileAccess.open(file_name, FileAccess.READ)
+	var json_object = JSON.new()
+	var parse_err = json_object.parse(file.get_as_text())
+	
+	card_data = json_object.get_data()
+	
+	sprite.texture = load(card_art_loc + card_id + ".png")
+	name_label.text = card_data["name"]
 
 func _ready() -> void:
 	target_position = position
+	load_card()
 
 func _process(_delta) -> void:
 	if being_dragged:

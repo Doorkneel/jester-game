@@ -1,0 +1,12 @@
+{
+	"id" : "test_card",
+	"name" : "Test Card",
+	"rules_text" : "Lorem ipsum sit dolor",
+	"effects" : [
+		{
+			"comedy" : 10,
+			"commonerFavour" : 20,
+			"courtFavour" : -10
+		}
+	]
+}
