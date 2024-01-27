@@ -14,7 +14,7 @@ var card_data_loc = "res://cards/"
 var card_art_loc = "res://assets/art/"
 var card_frame_loc = "res://assets/frames/"
 
-var card_id = "test_card"
+var card_id
 var card_data
 
 var pos_in_hand: int = -1
@@ -36,11 +36,11 @@ const rotation_speed: float = 0.2
 const snap_strength: float = 0.7
 
 func load_card():
-	var file_name = card_data_loc + card_id + ".json"
+	var file_name = "res://cards/card_list.json"
 	var file = FileAccess.open(file_name, FileAccess.READ)
 	var json_object = JSON.new()
 	var _parse_err = json_object.parse(file.get_as_text())
-	card_data = json_object.get_data()
+	card_data = json_object.get_data()[card_id]
 	
 	card_art.texture = load(card_art_loc + card_id + ".png")
 	card_frame.texture = load(card_frame_loc + card_data["type"] + "_frame.png")

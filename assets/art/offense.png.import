@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n75gt157tqak"
-path="res://.godot/imported/audience_participation.png-761a39efaa58788441edec8dff94e919.ctex"
+uid="uid://3kjixxqpn1g0"
+path="res://.godot/imported/offense.png-8b312dae639eaa7f1712bef5357e0983.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/audience_participation.png"
-dest_files=["res://.godot/imported/audience_participation.png-761a39efaa58788441edec8dff94e919.ctex"]
+source_file="res://assets/art/offense.png"
+dest_files=["res://.godot/imported/offense.png-8b312dae639eaa7f1712bef5357e0983.ctex"]
 
 [params]
 

@@ -22,7 +22,7 @@ const card_scene = preload("res://scenes/card.tscn")
 	"improv": 2,
 	"setup": 2,
 	"toilet_humour": 1,
-	"audience_participation": 1
+	"crowd_work": 1
 }
 
 # crowd attitudes (range between -40 and 40)
@@ -114,7 +114,7 @@ func draw_card() -> void:
 	var card_id = deck.pop_back()
 	
 	# TODO TEMPORARY
-	card_id = "test_card"
+	card_id = "naughty_joke"
 	
 	var new_card: Card = card_scene.instantiate()
 	hand.append(new_card)
