@@ -7,15 +7,57 @@
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
 
-[node name="CardSlot" parent="." instance=ExtResource("2_3wt2b")]
-position = Vector2(584, 236)
+[node name="Stage" type="Node2D" parent="."]
+position = Vector2(574, 371)
+metadata/_edit_group_ = true
 
-[node name="CardSlot2" parent="." instance=ExtResource("2_3wt2b")]
-position = Vector2(864, 237)
-rotation = 0.598648
+[node name="Stage1" parent="Stage" instance=ExtResource("2_3wt2b")]
+position = Vector2(-147, 0)
+
+[node name="Stage2" parent="Stage" instance=ExtResource("2_3wt2b")]
+position = Vector2(-49, 0)
+
+[node name="Stage3" parent="Stage" instance=ExtResource("2_3wt2b")]
+position = Vector2(49, 0)
+
+[node name="Stage4" parent="Stage" instance=ExtResource("2_3wt2b")]
+position = Vector2(147, 0)
+
+[node name="Court" type="Node2D" parent="."]
+position = Vector2(929, 231)
+rotation = 0.523599
+metadata/_edit_group_ = true
+
+[node name="Court1" parent="Court" instance=ExtResource("2_3wt2b")]
+position = Vector2(-49, 0)
+location = 2
+
+[node name="Court2" parent="Court" instance=ExtResource("2_3wt2b")]
+position = Vector2(49, 0)
+location = 2
+
+[node name="Commoners" type="Node2D" parent="."]
+position = Vector2(228, 221)
+rotation = -0.523599
+metadata/_edit_group_ = true
+
+[node name="Commoners1" parent="Commoners" instance=ExtResource("2_3wt2b")]
+position = Vector2(-49, 0)
+location = 1
+
+[node name="Commoners2" parent="Commoners" instance=ExtResource("2_3wt2b")]
+position = Vector2(49, 0)
+location = 1
+
+[node name="King" type="Node2D" parent="."]
+position = Vector2(569, 104)
+metadata/_edit_group_ = true
+
+[node name="King" parent="King" instance=ExtResource("2_3wt2b")]
+location = 3
 
 [node name="Card" parent="." instance=ExtResource("3_aadjc")]
-position = Vector2(206, 193)
+position = Vector2(227, 539)
 
 [node name="Card2" parent="." instance=ExtResource("3_aadjc")]
-position = Vector2(238, 231)
+position = Vector2(259, 577)
