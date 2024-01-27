@@ -4,19 +4,28 @@ extends Area2D
 signal card_dragged(this: Card)
 signal card_released(this: Card)
 
-var card_id
+var card_id = "test_card"
+var card_data
+
 var is_hovering = false
 var is_selected = false
 
-func load_card_data(card_id):
-	pass
+func _ready():
+	load_card_data()
 
 func _process(delta):
 	if is_selected:
 		position = get_global_mouse_position()
 
+func load_card_data():
+	var file_name = "res://cards/" + card_id + ".json"
+	var file = FileAccess.open(file_name, FileAccess.READ)
+	var json_object = JSON.new()
+	var parse_err = json_object.parse(file.get_as_text())
+	card_data = json_object.get_data()
+
 func _on_mouse_entered():
-		is_hovering = true
+	is_hovering = true
 
 func _on_mouse_exit():
 	is_hovering = false
