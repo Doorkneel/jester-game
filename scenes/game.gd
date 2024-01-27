@@ -20,7 +20,7 @@ const card_scene = preload("res://scenes/card.tscn")
 # starting cards
 @export var starting_cards = {
 	"quip": 3,
-	"improv": 2,
+	"naughty_joke": 2,
 	"setup": 2,
 	"toilet_humour": 1,
 	"crowd_work": 1
@@ -122,9 +122,6 @@ func ease_in_out(x: float) -> float:
 func draw_card() -> void:
 	if len(deck) <= 0: return # TODO indicate empty deck
 	var card_id = deck.pop_back()
-	
-	# TODO TEMPORARY
-	card_id = "naughty_joke"
 	
 	var new_card: Card = card_scene.instantiate()
 	hand.append(new_card)
