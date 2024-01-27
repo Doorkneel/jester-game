@@ -65,10 +65,3 @@ func snap_to_slot(slot: CardSlot) -> void:
 	target_position = slot.position
 	target_rotation = slot.rotation
 	origin_slot = slot
-
-func return_to_hand_or_slot() -> void:
-	if origin_slot:
-		snap_to_slot(origin_slot)
-	elif pos_in_hand >= 0:
-		# return to hand
-		pass

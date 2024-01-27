@@ -12,14 +12,9 @@ func _ready() -> void:
 	for card in get_tree().get_nodes_in_group("cards") as Array[Card]:
 		card.connect("card_released", self._on_card_released)
 
-func _process(_delta) -> void:
-	pass
-
 func _on_card_slot_highlighted(slot: CardSlot) -> void:
 	highlighted_slot = slot
 
 func _on_card_released(card: Card) -> void:
 	if highlighted_slot:
 		card.snap_to_slot(highlighted_slot)
-	else:
-		card.return_to_hand_or_slot()
