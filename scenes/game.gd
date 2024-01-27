@@ -15,6 +15,11 @@ extends Node
 @onready var commoner_slots = [$Commoners/Commoners1, $Commoners/Commoners2] as Array[CardSlot]
 @onready var king_slot = $King/King as CardSlot
 
+@export var commoner_json: JSON
+@export var court_json: JSON
+@onready var court_cards_data = court_json.get_data()
+@onready var commoner_cards_data = commoner_json.get_data()
+
 const card_scene = preload("res://scenes/card.tscn")
 
 # starting cards

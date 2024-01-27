@@ -12,12 +12,12 @@ signal card_returned_to_hand(this: Card)
 @onready var rules_text: Label = $RulesText as Label
 
 @export var card_list_json: JSON
+var card_data
 
-var card_art_loc = "res://assets/art/"
-var card_frame_loc = "res://assets/frames/"
+const card_art_loc: String = "res://assets/art/"
+const card_frame_loc: String = "res://assets/frames/"
 
 var card_id
-var card_data
 
 var pos_in_hand: int = -1
 var current_slot: CardSlot
@@ -27,10 +27,10 @@ static var card_being_dragged: Card
 var highlighted_slot: CardSlot
 
 # Current interaction
-var interactable = true
-var being_hovered = false
-var being_dragged = false
-var should_return_to_hand = false
+var interactable: bool = true
+var being_hovered: bool = false
+var being_dragged: bool = false
+var should_return_to_hand: bool = false
 
 # Target position & rotation for animation
 var desired_position: Vector2
