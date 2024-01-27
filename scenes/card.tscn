@@ -1,36 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://onajvaufej6p"]
+[gd_scene load_steps=5 format=3 uid="uid://onajvaufej6p"]
 
 [ext_resource type="Script" path="res://scenes/card.gd" id="1_ylb3u"]
-[ext_resource type="Texture2D" uid="uid://bnoeiiac8j6kd" path="res://assets/card_back.jpeg" id="2_dpha7"]
+[ext_resource type="Texture2D" uid="uid://n75gt157tqak" path="res://assets/art/audience_participation.png" id="2_fpw6x"]
+[ext_resource type="Texture2D" uid="uid://qh3emu5ej85e" path="res://assets/frames/commoner_frame.png" id="3_qdvpb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7kx2"]
-size = Vector2(77, 108)
+size = Vector2(100, 140)
 
 [node name="Card" type="Area2D" groups=["cards"]]
 script = ExtResource("1_ylb3u")
 
 [node name="Art" type="Sprite2D" parent="."]
-position = Vector2(-7.62939e-06, -1.52588e-05)
-scale = Vector2(0.433333, 0.433333)
-texture = ExtResource("2_dpha7")
+position = Vector2(1, -19)
+scale = Vector2(0.447619, 0.447619)
+texture = ExtResource("2_fpw6x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 4)
 shape = SubResource("RectangleShape2D_h7kx2")
 
+[node name="RulesText" type="Label" parent="."]
+offset_left = -50.0
+offset_top = 29.0
+offset_right = 51.0
+offset_bottom = 74.0
+text = "Test text"
+
 [node name="Name" type="Label" parent="."]
-offset_left = -37.0
-offset_top = -55.0
-offset_right = 38.0
-offset_bottom = -29.0
+offset_left = -50.0
+offset_top = -68.0
+offset_right = 25.0
+offset_bottom = -42.0
 text = "Temp
 "
 
-[node name="RulesText" type="Label" parent="."]
-offset_left = -38.0
-offset_top = 6.0
-offset_right = 37.0
-offset_bottom = 53.0
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(1, 4.05309)
+scale = Vector2(0.442478, 0.443374)
+texture = ExtResource("3_qdvpb")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

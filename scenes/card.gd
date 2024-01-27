@@ -8,9 +8,9 @@ signal card_picked_up(this: Card)
 signal card_released(this: Card)
 
 var card_data_loc = "res://cards/"
-var card_art_loc = "res://assets/"
+var card_art_loc = "res://assets/art/"
 
-var card_id = "test_card"
+var card_id = "audience_participation"
 var card_data
 
 # Track card being dragged across multiple card instances
