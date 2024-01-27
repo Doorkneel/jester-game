@@ -5,22 +5,21 @@ var round_number: int = 0
 var max_round_number: int = 7
 
 var highlighted_slot: CardSlot
-var dragged_card: Card
 
-func _ready():
-	pass # Replace with function body.
+func _ready() -> void:
+	for slot in get_tree().get_nodes_in_group("slots") as Array[CardSlot]:
+		slot.connect("slot_highlighted", self._on_card_slot_highlighted)
+	for card in get_tree().get_nodes_in_group("cards") as Array[Card]:
+		card.connect("card_released", self._on_card_released)
 
-func _process(delta):
+func _process(_delta) -> void:
 	pass
 
 func _on_card_slot_highlighted(slot: CardSlot) -> void:
 	highlighted_slot = slot
 
-func _on_card_slot_unhighlighted() -> void:
-	highlighted_slot = null
-
-func _on_card_dragged(card: Card) -> void:
-	pass
-
 func _on_card_released(card: Card) -> void:
-	pass
+	if highlighted_slot:
+		card.snap_to_slot(highlighted_slot)
+	else:
+		card.return_to_hand_or_slot()

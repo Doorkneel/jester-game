@@ -12,9 +12,10 @@ position = Vector2(584, 236)
 
 [node name="CardSlot2" parent="." instance=ExtResource("2_3wt2b")]
 position = Vector2(864, 237)
+rotation = 0.598648
 
 [node name="Card" parent="." instance=ExtResource("3_aadjc")]
 position = Vector2(206, 193)
 
-[connection signal="slot_highlighted" from="CardSlot" to="." method="_on_card_slot_highlighted"]
-[connection signal="slot_unhighlighted" from="CardSlot" to="." method="_on_card_slot_unhighlighted"]
+[node name="Card2" parent="." instance=ExtResource("3_aadjc")]
+position = Vector2(238, 231)
