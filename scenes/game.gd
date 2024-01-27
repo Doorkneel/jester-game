@@ -8,6 +8,7 @@ extends Node
 @onready var card_draw_timer = $CardDrawTimer as Timer
 @onready var card_spawn = $CardSpawn as Marker2D
 @onready var hand_pos = $Path2D/HandPos as PathFollow2D
+@onready var hand_hitbox = $HandHitbox as Area2D
 
 @onready var stage_slots = [$Stage/Stage1, $Stage/Stage2, $Stage/Stage3] as Array[CardSlot]
 @onready var court_slots = [$Court/Court1, $Court/Court2] as Array[CardSlot]
@@ -59,10 +60,19 @@ func _ready() -> void:
 func _on_card_released(card: Card) -> void:
 	for slot in slots:
 		slot.disconnect("slot_hovered", card._on_slot_hovered)
+	hand_hitbox.disconnect("mouse_entered", card._on_hand_hitbox_entered)
+	hand_hitbox.disconnect("mouse_exited", card._on_hand_hitbox_exited)
 
 func _on_card_picked_up(card: Card) -> void:
 	for slot in slots:
 		slot.connect("slot_hovered", card._on_slot_hovered)
+	hand_hitbox.connect("mouse_entered", card._on_hand_hitbox_entered)
+	hand_hitbox.connect("mouse_exited", card._on_hand_hitbox_exited)
+	
+func _on_card_returned_to_hand(card: Card) -> void:
+	hand.append(card)
+	card.pos_in_hand = len(hand) - 1
+	layout_hand()
 
 func advance_round() -> void:
 	rounds_remaining -= 1
@@ -118,13 +128,13 @@ func draw_card() -> void:
 	
 	var new_card: Card = card_scene.instantiate()
 	hand.append(new_card)
-	new_card.pos_in_hand = len(hand) - 1
 	new_card.position = card_spawn.position
 	new_card.card_id = card_id
 	
 	new_card.connect("card_released", self._on_card_released)
 	new_card.connect("card_picked_up", self._on_card_picked_up)
 	new_card.connect("card_played_to_slot", self._on_card_played_to_slot)
+	new_card.connect("card_returned_to_hand", self._on_card_returned_to_hand)
 	
 	layout_hand()
 	add_child(new_card)
@@ -140,6 +150,7 @@ func layout_hand() -> void:
 		var width_proportion: float = 1 - exp(-len(hand) / 6.0)
 		hand_pos.progress_ratio = 0.5 - 0.5 * width_proportion + width_proportion * (i + 0.5) / len(hand)
 		hand[i].pos_in_hand = i
+		hand[i].z_index = i
 		hand[i].desired_position = hand_pos.global_position
 		hand[i].desired_rotation = hand_pos.rotation
 

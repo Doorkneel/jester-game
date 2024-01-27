@@ -4,6 +4,7 @@ extends Area2D
 signal card_picked_up(this: Card)
 signal card_released(this: Card)
 signal card_played_to_slot(this: Card)
+signal card_returned_to_hand(this: Card)
 
 @onready var card_art: Sprite2D = $Art as Sprite2D
 @onready var card_frame: Sprite2D = $Frame as Sprite2D
@@ -27,6 +28,7 @@ var highlighted_slot: CardSlot
 var interactable = true
 var being_hovered = false
 var being_dragged = false
+var should_return_to_hand = false
 
 # Target position & rotation for animation
 var desired_position: Vector2
@@ -89,13 +91,16 @@ func _input(_event) -> void:
 	elif Input.is_action_just_released("click"):
 		if being_dragged:
 			being_dragged = false
-			z_index = 0
+			z_index = 0 if pos_in_hand < 0 else pos_in_hand
 			card_released.emit(self)
 			card_being_dragged = null
 			
 			if highlighted_slot:
 				play_to_slot(highlighted_slot)
 				highlighted_slot = null
+			elif should_return_to_hand:
+				card_returned_to_hand.emit(self)
+				should_return_to_hand = false
 
 func _on_slot_hovered(id: int, slot: CardSlot) -> void:
 	# do not unhighlight unless currently-highlighted slot is requesting it;
@@ -105,6 +110,12 @@ func _on_slot_hovered(id: int, slot: CardSlot) -> void:
 	
 	# TODO do some logic to check whether card can be placed here
 	highlighted_slot = slot
+
+func _on_hand_hitbox_entered() -> void:
+	if pos_in_hand < 0: should_return_to_hand = true
+
+func _on_hand_hitbox_exited() -> void:
+	should_return_to_hand = false
 
 func play_to_slot(slot: CardSlot) -> void:
 	desired_position = slot.global_position
