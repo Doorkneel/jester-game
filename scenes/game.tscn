@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ekjjhiqy5iy"]
+[gd_scene load_steps=11 format=3 uid="uid://c3ekjjhiqy5iy"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_gmfm1"]
 [ext_resource type="PackedScene" uid="uid://bnla5m7oa6rcr" path="res://scenes/card_slot.tscn" id="2_3wt2b"]
@@ -44,6 +44,12 @@ corner_radius_bottom_left = 5
 shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
 shadow_size = 3
 shadow_offset = Vector2(3, 3)
+
+[sub_resource type="Curve2D" id="Curve2D_7rpl5"]
+_data = {
+"points": PackedVector2Array(-225.018, 46.298, 225.018, -46.298, 90, 644, -248.315, -53.4812, 248.315, 53.4812, 981, 646)
+}
+point_count = 2
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
@@ -94,9 +100,11 @@ metadata/_edit_group_ = true
 location = 3
 
 [node name="Card" parent="." instance=ExtResource("3_aadjc")]
+visible = false
 position = Vector2(582, 532)
 
 [node name="Card2" parent="." instance=ExtResource("3_aadjc")]
+visible = false
 position = Vector2(614, 570)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -144,4 +152,21 @@ offset_bottom = 580.0
 fill_mode = 3
 show_percentage = false
 
+[node name="CardDrawTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(70, -497)
+scale = Vector2(0.902357, 1.77572)
+curve = SubResource("Curve2D_7rpl5")
+
+[node name="HandPos" type="PathFollow2D" parent="Path2D"]
+position = Vector2(90, 644)
+rotation = -0.202921
+
+[node name="CardSpawn" type="Marker2D" parent="."]
+position = Vector2(1254, 464)
+
 [connection signal="pressed" from="CanvasLayer/EndRound" to="." method="advance_round"]
+[connection signal="timeout" from="CardDrawTimer" to="." method="_on_card_draw_timer_timeout"]
