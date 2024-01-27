@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://dx4xoex2kbu64" path="res://assets/frame.png" id="2_p8qex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5hr5"]
-size = Vector2(94, 120)
+size = Vector2(114, 152)
 
 [node name="CardSlot" type="Area2D" groups=["slots"]]
 script = ExtResource("1_07pnj")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.316667, 0.317788)
+scale = Vector2(0.441667, 0.44323)
 texture = ExtResource("2_p8qex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

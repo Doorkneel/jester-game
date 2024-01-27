@@ -1,63 +1,147 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3ekjjhiqy5iy"]
+[gd_scene load_steps=10 format=3 uid="uid://c3ekjjhiqy5iy"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_gmfm1"]
 [ext_resource type="PackedScene" uid="uid://bnla5m7oa6rcr" path="res://scenes/card_slot.tscn" id="2_3wt2b"]
 [ext_resource type="PackedScene" uid="uid://onajvaufej6p" path="res://scenes/card.tscn" id="3_aadjc"]
+[ext_resource type="FontFile" uid="uid://c3syvr3xbve25" path="res://assets/Magic Sound.ttf" id="5_2d1mq"]
+[ext_resource type="FontFile" uid="uid://3qnfqecml1m" path="res://assets/Skincake.ttf" id="5_x7nl2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qgtx"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwejd"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17vhw"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poyui"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
 
 [node name="Stage" type="Node2D" parent="."]
-position = Vector2(574, 371)
+position = Vector2(578, 366)
 metadata/_edit_group_ = true
 
 [node name="Stage1" parent="Stage" instance=ExtResource("2_3wt2b")]
-position = Vector2(-147, 0)
+position = Vector2(-123, 0)
 
 [node name="Stage2" parent="Stage" instance=ExtResource("2_3wt2b")]
-position = Vector2(-49, 0)
 
 [node name="Stage3" parent="Stage" instance=ExtResource("2_3wt2b")]
-position = Vector2(49, 0)
-
-[node name="Stage4" parent="Stage" instance=ExtResource("2_3wt2b")]
-position = Vector2(147, 0)
+position = Vector2(123, 0)
 
 [node name="Court" type="Node2D" parent="."]
-position = Vector2(929, 231)
-rotation = 0.523599
+position = Vector2(927, 228)
+rotation = 0.558505
 metadata/_edit_group_ = true
 
 [node name="Court1" parent="Court" instance=ExtResource("2_3wt2b")]
-position = Vector2(-49, 0)
+position = Vector2(-61, 0)
 location = 2
 
 [node name="Court2" parent="Court" instance=ExtResource("2_3wt2b")]
-position = Vector2(49, 0)
+position = Vector2(61, 0)
 location = 2
 
 [node name="Commoners" type="Node2D" parent="."]
-position = Vector2(228, 221)
-rotation = -0.523599
+position = Vector2(224, 227)
+rotation = -0.558505
 metadata/_edit_group_ = true
 
 [node name="Commoners1" parent="Commoners" instance=ExtResource("2_3wt2b")]
-position = Vector2(-49, 0)
+position = Vector2(-61, 0)
 location = 1
 
 [node name="Commoners2" parent="Commoners" instance=ExtResource("2_3wt2b")]
-position = Vector2(49, 0)
+position = Vector2(61, 0)
 location = 1
 
 [node name="King" type="Node2D" parent="."]
-position = Vector2(569, 104)
+position = Vector2(576, 118)
 metadata/_edit_group_ = true
 
 [node name="King" parent="King" instance=ExtResource("2_3wt2b")]
 location = 3
 
 [node name="Card" parent="." instance=ExtResource("3_aadjc")]
-position = Vector2(227, 539)
+position = Vector2(582, 532)
 
 [node name="Card2" parent="." instance=ExtResource("3_aadjc")]
-position = Vector2(259, 577)
+position = Vector2(614, 570)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Rounds" type="Label" parent="CanvasLayer"]
+offset_left = 1051.0
+offset_top = 477.0
+offset_right = 1101.0
+offset_bottom = 555.0
+theme_override_colors/font_color = Color(0.768627, 0.298039, 0.329412, 1)
+theme_override_colors/font_outline_color = Color(0.960784, 0.74902, 0.764706, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("5_2d1mq")
+theme_override_font_sizes/font_size = 36
+text = "7"
+
+[node name="RoundsText" type="Label" parent="CanvasLayer"]
+offset_left = 1018.0
+offset_top = 552.0
+offset_right = 1133.0
+offset_bottom = 604.0
+theme_override_colors/font_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_fonts/font = ExtResource("5_x7nl2")
+text = "rounds remain"
+
+[node name="EndRound" type="Button" parent="CanvasLayer"]
+offset_left = 999.0
+offset_top = 576.0
+offset_right = 1140.0
+offset_bottom = 627.0
+theme_override_colors/font_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_colors/font_focus_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_fonts/font = ExtResource("5_2d1mq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0qgtx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mwejd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_17vhw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_poyui")
+text = "End Round"
+
+[node name="Humour" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 41.0
+offset_top = 398.0
+offset_right = 86.0
+offset_bottom = 580.0
+fill_mode = 3
+show_percentage = false
+
+[connection signal="pressed" from="CanvasLayer/EndRound" to="." method="advance_round"]

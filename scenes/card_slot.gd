@@ -12,10 +12,10 @@ var contents: Array[Card] = []
 func _ready() -> void:
 	# TODO set visuals depending on location
 	match location:
-		0: sprite.modulate = Color(1, 0, 0)
-		1: sprite.modulate = Color(1, 1, 0)
-		2: sprite.modulate = Color(1, 0, 1)
-		3: sprite.modulate = Color(0, 1, 0)
+		0: sprite.modulate = Color(0.6, 0.6, 0)
+		1: sprite.modulate = Color(0.5, 0.3, 0.4)
+		2: sprite.modulate = Color(0, 0.6, 0.6)
+		3: sprite.modulate = Color(0.8, 0, 1)
 
 func _on_mouse_entered() -> void:
 	slot_hovered.emit(self)
