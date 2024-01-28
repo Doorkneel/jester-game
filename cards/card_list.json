@@ -63,9 +63,9 @@
 		"type" : "punchline",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
-			"comedy" : 10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"comedy" : 30,
+			"commonerFavour" : -20,
+			"courtFavour" : -20
 		}
 	},
 	"offense" : {
@@ -190,5 +190,5 @@
 			"commonerFavour" : 0,
 			"courtFavour" : 0
 		}
-	},
+	}
 }

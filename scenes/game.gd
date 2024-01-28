@@ -35,18 +35,18 @@ const initial_humour: int = 5
 
 # starting cards
 @export var starting_cards = {
-	"quip": 5,
-	"setup": 3,
-	"toilet_humour": 2,
-	"political_humour": 2,
-	"crowd_work": 2,
+	"quip": 6,
+	"setup": 7,
+	"toilet_humour": 3,
+	"political_humour": 3,
+	"crowd_work": 3,
 	"roast": 3,
-	"prop_humour" : 1,
-	"improv" : 1,
-	"double_down" : 1,
-	"read_the_room" : 1,
-	"gallows_humour" : 3
-	
+	"prop_humour" : 2,
+	"improv" : 4,
+	"double_down" : 2,
+	"read_the_room" : 3,
+	"gallows_humour" : 3,
+	"naughty_humour" : 3
 }
 
 # crowd attitudes (range between -40 and 40)
@@ -187,6 +187,12 @@ func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
 	var num_reactions: int = precalculate_reactions()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
+	if net_humour == 0:
+		court_attitude -= 10
+		commoner_attitude += 10
+	elif net_humour > 30:
+		court_attitude += 10
+		commoner_attitude += 10
 	else:
 		if net_humour < 0:
 			sounds.gasp(0)

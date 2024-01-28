@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://onajvaufej6p"]
+[gd_scene load_steps=10 format=3 uid="uid://onajvaufej6p"]
 
 [ext_resource type="Script" path="res://scenes/card.gd" id="1_ylb3u"]
 [ext_resource type="Texture2D" uid="uid://eaw108ahxl8p" path="res://assets/art/crowd_work.png" id="2_8hwsp"]
@@ -9,11 +9,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7kx2"]
 size = Vector2(100, 140)
-
-[sub_resource type="LabelSettings" id="LabelSettings_cqs4q"]
-line_spacing = 0.0
-font_size = 7
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_eqt4j"]
 resource_name = "score"
@@ -88,7 +83,6 @@ offset_bottom = 64.0
 theme_override_colors/font_color = Color(0.12549, 0.12549, 0.12549, 1)
 theme_override_font_sizes/font_size = 8
 text = "Add 5 comedy"
-label_settings = SubResource("LabelSettings_cqs4q")
 autowrap_mode = 2
 
 [node name="Score" type="Label" parent="."]
