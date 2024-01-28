@@ -120,6 +120,24 @@ func _on_hand_hitbox_entered() -> void:
 func _on_hand_hitbox_exited() -> void:
 	should_return_to_hand = false
 
+func can_play_to_slot(slot: CardSlot) -> bool:
+	const locations = ["Stage", "Commoners", "Court", "King"]
+	if locations[slot.location] == "King": return false # TODO add exceptions?
+
+	if locations[slot.location] == "Court":
+		if len(slot.contents) == 0: return false
+		var top_card = slot.contents.front().card_id
+		return top_card == "cheer_court" or top_card == "offense" \
+			and (card_id == "double_down" or card_id == "roast")
+	
+	if locations[slot.location] == "Commoners":
+		if len(slot.contents) == 0: return false
+		var top_card = slot.contents.front().card_id
+		return top_card == "cheer_commoners" or top_card == "heckle" \
+			and (card_id == "double_down" or card_id == "roast")
+	
+	return card_id != "roast" and card_id != "double_down" and len(slot.contents) == 0
+
 func play_to_slot(slot: CardSlot) -> void:
 	# remove card from old slot
 	if current_slot: current_slot.contents.pop_front()
@@ -137,11 +155,6 @@ func play_to_slot(slot: CardSlot) -> void:
 		# return card to hand
 		card_returned_to_hand.emit(self)
 		should_return_to_hand = false
-		
-	
+
 func show_comedy_score():
 	anim.play("score")
-
-
-func _on_animation_player_animation_finished(anim_name):
-	pass # Replace with function body.
