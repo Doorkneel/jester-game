@@ -1,4 +1,26 @@
 {
+	"cheer_commoners" : {
+		"name": "Cheer",
+		"type": "commoner",
+		"rules_text": "You can play on this",
+		"effect" : {
+			"comedy" : 0,
+			"commonerFavour" : 0,
+			"courtFavour" : 0,
+			"quality" : "good"
+		}
+	},
+	"cheer_court" : {
+		"name": "Cheer",
+		"type": "court",
+		"rules_text": "You can play on this",
+		"effect" : {
+			"comedy" : 0,
+			"commonerFavour" : 0,
+			"courtFavour" : 0,
+			"quality" : "good"
+		}
+	},
 	"crowd_work" : {
 		"name" : "Crowd Work",
 		"type" : "jester",
@@ -11,7 +33,7 @@
 	},
 	"gallows_humour" : {
 		"name" : "Gallows Humor",
-		"type" : "commoner",
+		"type" : "jester",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
 			"comedy" : 10,
