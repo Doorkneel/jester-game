@@ -3,20 +3,27 @@
 [ext_resource type="Script" path="res://scenes/card_slot.gd" id="1_07pnj"]
 [ext_resource type="Texture2D" uid="uid://dx4xoex2kbu64" path="res://assets/frame.png" id="2_p8qex"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5hr5"]
-size = Vector2(114, 152)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kio3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-shadow_color = Color(1, 0.858824, 0.298039, 1)
+shadow_color = Color(1, 0.858824, 0.298039, 0.501961)
 shadow_size = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5hr5"]
+size = Vector2(114, 152)
 
 [node name="CardSlot" type="Area2D" groups=["slots"]]
 script = ExtResource("1_07pnj")
+
+[node name="Highlight" type="Panel" parent="."]
+offset_left = -51.0
+offset_top = -72.0
+offset_right = 52.0
+offset_bottom = 75.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0kio3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.441667, 0.44323)
@@ -24,14 +31,6 @@ texture = ExtResource("2_p8qex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_a5hr5")
-
-[node name="Highlight" type="Panel" parent="."]
-visible = false
-offset_left = -51.0
-offset_top = -72.0
-offset_right = 52.0
-offset_bottom = 75.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_0kio3")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

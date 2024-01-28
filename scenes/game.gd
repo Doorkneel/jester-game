@@ -33,11 +33,12 @@ const initial_humour: int = 5
 
 # starting cards
 @export var starting_cards = {
-	"quip": 3,
-	"naughty_joke": 2,
-	"setup": 2,
-	"toilet_humour": 1,
-	"crowd_work": 1
+	"quip": 5,
+	"naughty_joke": 3,
+	"setup": 3,
+	"toilet_humour": 2,
+	"crowd_work": 3,
+	"roast": 3
 }
 
 # crowd attitudes (range between -40 and 40)
@@ -73,14 +74,20 @@ func _ready() -> void:
 
 func _on_card_released(card: Card) -> void:
 	for slot in slots:
-		slot.disconnect("slot_hovered", card._on_slot_hovered)
+		if card.can_play_to_slot(slot):
+			slot.disconnect("slot_hovered", card._on_slot_hovered)
+			slot.show_highlight(false)
+	
 	hand_hitbox.disconnect("mouse_entered", card._on_hand_hitbox_entered)
 	hand_hitbox.disconnect("mouse_exited", card._on_hand_hitbox_exited)
 
 func _on_card_picked_up(card: Card) -> void:
 	sounds.card_draw()
 	for slot in slots:
-		slot.connect("slot_hovered", card._on_slot_hovered)
+		if card.can_play_to_slot(slot):
+			slot.connect("slot_hovered", card._on_slot_hovered)
+			slot.show_highlight(true)
+		
 	hand_hitbox.connect("mouse_entered", card._on_hand_hitbox_entered)
 	hand_hitbox.connect("mouse_exited", card._on_hand_hitbox_exited)
 	
@@ -106,6 +113,13 @@ func precalculate_net_humour() -> int:
 		net_humour += data["effect"]["comedy"]
 	return net_humour
 
+func animate_humour_bonus(slot: CardSlot) -> void:
+	slot.show_highlight(true)
+	var top_card: Card = slot.contents[len(slot.contents) - 1]
+	top_card.show_comedy_score()
+	await top_card.anim.animation_finished
+	slot.show_highlight(false)
+
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
@@ -116,13 +130,11 @@ func advance_round() -> void:
 		var data = get_slot_data(slot)
 		if not data: continue
 		
-		slot.show_highlight(true)
 		humour_bar.value += data["effect"]["comedy"]
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		await get_tree().create_timer(pause_on_card).timeout # TODO rather await Daniel's +10 animation
-		slot.show_highlight(false)
+		await animate_humour_bonus(slot)
 		free_slot(slot)
 	
 	# commoner cards
@@ -130,13 +142,11 @@ func advance_round() -> void:
 		var data = get_slot_data(slot)
 		if not data: continue
 		
-		slot.show_highlight(true)
 		humour_bar.value += data["effect"]["comedy"]
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		await get_tree().create_timer(pause_on_card).timeout
-		slot.show_highlight(false)
+		await animate_humour_bonus(slot)
 		free_slot(slot)
 	
 		# court cards
@@ -144,13 +154,11 @@ func advance_round() -> void:
 		var data = get_slot_data(slot)
 		if not data: continue
 		
-		slot.show_highlight(true)
 		humour_bar.value += data["effect"]["comedy"]
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		await get_tree().create_timer(pause_on_card).timeout
-		slot.show_highlight(false)
+		await animate_humour_bonus(slot)
 		free_slot(slot)
 	
 	# king card
@@ -214,7 +222,7 @@ func populate_audience():
 		var slot = commoner_slots[i]
 		var new_card: Card = card_scene.instantiate()
 		
-		new_card.card_id = "heckle"
+		new_card.card_id = "heckle" # TODO temp
 		new_card.interactable = false
 		
 		add_child(new_card)
@@ -224,8 +232,9 @@ func populate_audience():
 		var slot = court_slots[i]
 		var new_card: Card = card_scene.instantiate()
 		
-		new_card.card_id = "offense"
+		new_card.card_id = "offense" # TODO temp
 		new_card.interactable = false
+		
 		if new_card.card_id == "offense": sounds.gasp(randf())
 		
 		add_child(new_card)
