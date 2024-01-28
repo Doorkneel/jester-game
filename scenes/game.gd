@@ -2,6 +2,7 @@ class_name Game
 extends Node
 
 @onready var slots = get_tree().get_nodes_in_group("slots") as Array[CardSlot]
+@export var card_list_json: JSON
 
 @onready var rounds_label = $CanvasLayer/Rounds as Label
 @onready var humour_bar = $CanvasLayer/Humour as ProgressBar
@@ -9,6 +10,10 @@ extends Node
 @onready var card_spawn = $CardSpawn as Marker2D
 @onready var hand_pos = $Path2D/HandPos as PathFollow2D
 @onready var hand_hitbox = $HandHitbox as Area2D
+
+@onready var stage_zone = $Stage
+@onready var court_zone = $Court
+@onready var commoner_zone = $Commoners
 
 @onready var stage_slots = [$Stage/Stage1, $Stage/Stage2, $Stage/Stage3] as Array[CardSlot]
 @onready var court_slots = [$Court/Court1, $Court/Court2] as Array[CardSlot]
@@ -53,7 +58,7 @@ func _ready() -> void:
 	for card in starting_cards:
 		for i in range(starting_cards[card]): deck.append(card)
 	deck.shuffle()
-	
+
 	# draw initial hand
 	card_draw_timer.start()
 
@@ -99,6 +104,7 @@ func advance_round() -> void:
 		pass
 		
 		draw_card()
+		populate_audience()
 
 func adjust_attitude(audience, favour) -> void:
 	if audience == "court":
@@ -135,6 +141,30 @@ func draw_card() -> void:
 	
 	layout_hand()
 	add_child(new_card)
+
+func populate_audience():
+	var commoner_card_quality = get_audience_cards("commoner")
+	var court_card_quality = get_audience_cards("court")
+	
+	for i in range(len(commoner_slots)):
+		var slot = commoner_slots[i]
+		var new_card: Card = card_scene.instantiate()
+		
+		new_card.card_id = "heckle"
+		new_card.interactable = false
+		
+		add_child(new_card)
+		new_card.play_to_slot(slot)
+		
+	for i in range(len(court_slots)):
+		var slot = court_slots[i]
+		var new_card: Card = card_scene.instantiate()
+		
+		new_card.card_id = "offense"
+		new_card.interactable = false
+		
+		add_child(new_card)
+		new_card.play_to_slot(slot)
 
 func _on_card_played_to_slot(card: Card) -> void:
 	if card.pos_in_hand >= 0:
