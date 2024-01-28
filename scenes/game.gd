@@ -35,7 +35,7 @@ const initial_humour: int = 5
 # starting cards
 @export var starting_cards = {
 	"quip": 6,
-	"setup": 7,
+	"setup": 14,
 	"toilet_humour": 3,
 	"political_humour": 3,
 	"crowd_work": 3,

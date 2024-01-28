@@ -61,7 +61,7 @@
 		"name" : "Naughty",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "Adds 30 comedy and offends everyone",
 		"effect" : {
 			"comedy" : 30,
 			"commonerFavour" : -20,
