@@ -29,7 +29,7 @@
 		"rules_text" : "+5 Comedy for every card in crowd",
 		"type": "misc",
 		"effect" : {
-			"comedy" : 5,
+			"comedy" : 10,
 			"commonerFavour" : 10,
 			"courtFavour" : 10
 		}
@@ -87,8 +87,8 @@
 		"rules_text" : "+10 comedy",
 		"effect" : {
 			"comedy" : 10,
-			"commonerFavour" : 0,
-			"courtFavour" : 0
+			"commonerFavour" : -10,
+			"courtFavour" : -10
 		}
 	},
 	"read_the_room" : {
