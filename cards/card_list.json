@@ -161,7 +161,7 @@
 	"political_humour" : {
 		"name" : "Politcal Humour",
 		"zone" : "jester",
-		"type" : "misc",
+		"type" : "punchline",
 		"rules_text" : "+15 comedy. \nFavours court",
 		"effect" : {
 			"comedy": 10,
@@ -183,7 +183,7 @@
 	"prop_humour" : {
 		"name" : "Prop Humour",
 		"zone" : "jester",
-		"type" : "misc",
+		"type" : "punchline",
 		"rules_text" : "+10 Comedy for \neach card in hand",
 		"effect" : {
 			"comedy": 10,
