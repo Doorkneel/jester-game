@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4txe3eyg25bs"]
+[gd_scene load_steps=18 format=3 uid="uid://4txe3eyg25bs"]
 
 [ext_resource type="Script" path="res://scenes/sounds.gd" id="1_f26rj"]
 [ext_resource type="AudioStream" uid="uid://x4ns56m5f0k1" path="res://assets/sounds/smallest.mp3" id="2_shoa8"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bmv72swbwqeep" path="res://assets/sounds/gasp_surprise.wav" id="14_iwaic"]
 [ext_resource type="AudioStream" uid="uid://dgr70fwbbwm5" path="res://assets/sounds/gasp_worry.wav" id="15_0r0ls"]
 [ext_resource type="AudioStream" uid="uid://bqsha8ehb85rw" path="res://assets/sounds/gasp_shock.wav" id="16_xd02u"]
+[ext_resource type="AudioStream" uid="uid://bpj3672d58205" path="res://assets/sounds/crickets.wav" id="17_aj6di"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_f26rj")
@@ -70,3 +71,6 @@ stream = ExtResource("15_0r0ls")
 
 [node name="GaspShock" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_xd02u")
+
+[node name="Crickets" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_aj6di")

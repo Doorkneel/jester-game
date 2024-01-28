@@ -2,6 +2,7 @@ class_name Sounds
 extends Node
 
 @onready var laughs = [
+	$Crickets,
 	$Smallest,
 	$Small,
 	$Medium,
@@ -21,10 +22,10 @@ extends Node
 
 func laugh(magnitude: float) -> void:
 	badumtss.play()
-	laughs[int(magnitude * len(laughs))].play()
+	laughs[round(magnitude * (len(laughs) - 1))].play()
 
 func gasp(severity: float) -> void:
-	gasps[int(severity * len(gasps))].play()
+	gasps[round(severity * (len(gasps) - 1))].play()
 
 func boo() -> void:
 	booing.play()
