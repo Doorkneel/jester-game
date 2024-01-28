@@ -49,7 +49,19 @@ const snap_strength: float = 0.7
 func load_card():
 	card_data = card_list_json.get_data()[card_id]
 	card_art.texture = load(card_art_loc + card_id + ".png")
-	card_frame.texture = load(card_frame_loc + card_data["type"] + "_frame.png")
+	
+	var card_frame_name
+	if card_data["zone"] == "jester":
+		if card_data.has("type"):
+			card_frame_name = "jester_" + card_data["type"] + "_frame"
+		else:	
+			card_frame_name = "jester_frame"
+	else:
+		card_frame_name = card_data["zone"] + "_frame"
+	
+	card_frame.texture = load(card_frame_loc + card_frame_name + ".png")
+	
+	
 	card_name.text = card_data["name"]
 	rules_text.text = card_data["rules_text"]
 	comedy = card_data["effect"]["comedy"]
