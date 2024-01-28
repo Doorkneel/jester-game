@@ -41,7 +41,7 @@ const initial_humour: int = 5
 	"political_humour": 2,
 	"crowd_work": 2,
 	"roast": 3,
-	"prop_humour" : 1,
+	"prop_humour" : 18,
 	"improv" : 1,
 	"double_down" : 1,
 	"read_the_room" : 1,
@@ -123,9 +123,16 @@ func precalculate_net_humour() -> int:
 	for slot in stage_slots + court_slots + commoner_slots: # TODO loop over king too?
 		var data = get_slot_data(slot)
 		if not data: continue
-		if data["effect"].has("comedy"):
-			net_humour += data["effect"]["comedy"]
+		net_humour += data["effect"]["comedy"]
 	return net_humour
+
+func precalculate_audience_cards() -> int:
+	var num_audience_cards: int = 0
+	for slot in stage_slots + court_slots + commoner_slots:
+		var data = get_slot_data(slot)
+		if not data: continue
+		if data["zone"] == "commoner" or data["zone"] == "court": num_audience_cards += 1
+	return num_audience_cards
 
 func animate_humour_bonus(slot: CardSlot) -> void:
 	var top_card: Card = slot.contents.back()
@@ -135,7 +142,7 @@ func animate_humour_bonus(slot: CardSlot) -> void:
 	await top_card.anim.animation_finished
 	slot.show_highlight(false)
 
-func handle_common_card_actions(data: Variant) -> void:
+func handle_common_card_actions(card: Card, data: Variant) -> void:
 	humour_bar.value += data["effect"]["comedy"]
 	if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 	if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
@@ -143,10 +150,14 @@ func handle_common_card_actions(data: Variant) -> void:
 	match data["card_id"]:
 		"improv":
 			cards_to_draw = 3
-		# TODO add more cards' logic here
+		"prop_humour":
+			humour_bar.value += data["effect"]["comedy"] * (len(hand) - 1)
+			card.update_score_text(data["effect"]["comedy"] * len(hand))
+		
 
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
+	var num_audience_cards: int = precalculate_audience_cards()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
 	else:
 		if net_humour < 0:
@@ -158,21 +169,21 @@ func advance_round() -> void:
 	for slot in stage_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		handle_common_card_actions(data)
+		handle_common_card_actions(slot.contents.back(), data)
 		await free_slot(slot)
 	
 	# commoner cards
 	for slot in commoner_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		handle_common_card_actions(data)
+		handle_common_card_actions(slot.contents.back(), data)
 		await free_slot(slot)
 	
 		# court cards
 	for slot in court_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		handle_common_card_actions(data)
+		handle_common_card_actions(slot.contents.back(), data)
 		await free_slot(slot)
 	
 	# king card
