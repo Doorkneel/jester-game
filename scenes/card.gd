@@ -130,6 +130,7 @@ func play_to_slot(slot: CardSlot) -> void:
 		desired_position = slot.global_position
 		desired_rotation = slot.global_rotation
 		slot.contents.append(self)
+		z_index = len(slot.contents)
 		card_played_to_slot.emit(self)
 		highlighted_slot = null
 	else:
