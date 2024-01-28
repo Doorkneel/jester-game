@@ -167,6 +167,16 @@ value = 5.0
 fill_mode = 3
 show_percentage = false
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 359.0
+offset_right = 119.0
+offset_bottom = 393.0
+theme_override_colors/font_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_fonts/font = ExtResource("5_2d1mq")
+theme_override_font_sizes/font_size = 14
+text = "Comedy"
+
 [node name="CardDrawTimer" type="Timer" parent="."]
 wait_time = 0.18
 one_shot = true
