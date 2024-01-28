@@ -142,7 +142,7 @@ func animate_humour_bonus(slot: CardSlot) -> void:
 	await top_card.anim.animation_finished
 	slot.show_highlight(false)
 
-func handle_common_card_actions(card: Card, data: Variant) -> void:
+func handle_common_card_actions(slot: CardSlot, card: Card, data: Variant) -> void:
 	humour_bar.value += data["effect"]["comedy"]
 	if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 	if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
@@ -177,25 +177,16 @@ func advance_round() -> void:
 			sounds.laugh(0)
 		else: sounds.laugh(min(net_humour / 45.0, 1)) # TODO tweak formula
 	
-	# stage cards
-	for slot in stage_slots:
+	for slot in stage_slots + commoner_slots + court_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		handle_common_card_actions(slot.contents.back(), data)
-		await free_slot(slot)
 	
-	# commoner cards
-	for slot in commoner_slots:
-		var data = get_slot_data(slot)
-		if not data: continue
-		handle_common_card_actions(slot.contents.back(), data)
-		await free_slot(slot)
-	
-		# court cards
-	for slot in court_slots:
-		var data = get_slot_data(slot)
-		if not data: continue
-		handle_common_card_actions(slot.contents.back(), data)
+		match data["card_id"]:
+			"read_the_room":
+				cards_to_draw = num_audience_cards
+			_:
+				handle_common_card_actions(slot, slot.contents.back(), data)
+				
 		await free_slot(slot)
 	
 	# king card
