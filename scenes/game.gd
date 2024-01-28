@@ -39,7 +39,7 @@ const initial_humour: int = 5
 	"setup": 3,
 	"toilet_humour": 2,
 	"political_humour": 2,
-	"crowd_work": 10,
+	"crowd_work": 2,
 	"roast": 3,
 	"prop_humour" : 1,
 	"improv" : 1,
@@ -55,7 +55,7 @@ var court_attitude: int = 0
 
 # main game counters
 # (humour level is found in humour_bar.value)
-var rounds_remaining: int = 5
+var rounds_remaining: int = 7
 
 # current deck and hand
 var deck: Array[String] = []
@@ -126,13 +126,13 @@ func precalculate_net_humour() -> int:
 		net_humour += data["effect"]["comedy"]
 	return net_humour
 
-func precalculate_bad_reactions() -> int:
-	var num_bad_reactions: int = 0
+func precalculate_reactions() -> int:
+	var num_reactions: int = 0
 	for slot in stage_slots + court_slots + commoner_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		if data["card_id"] == "heckle" or data["card_id"] == "offense": num_bad_reactions += 1
-	return num_bad_reactions
+		if data["zone"] == "court" or data["zone"] == "commoner": num_reactions += 1
+	return num_reactions
 
 func animate_humour_bonus(slot: CardSlot) -> void:
 	var top_card: Card = slot.contents.back()
@@ -159,11 +159,8 @@ func handle_common_card_actions(slot: CardSlot, card: Card, data: Variant) -> vo
 			var coin = 1 if randf() < 0.5 else -1
 			var rand_humor = data["effect"]["comedy"] * (2 if coin == 1 else -1)
 			
-			commoner_attitude -= data["effect"]["commonerFavour"]
-			court_attitude -= data["effect"]["courtFavour"]
-			
-			commoner_attitude += data["effect"]["commonerFavour"] * coin
-			court_attitude += data["effect"]["courtFavour"] * coin
+			commoner_attitude += data["effect"]["commonerFavour"] * (coin - 1)
+			court_attitude += data["effect"]["courtFavour"] * (coin - 1)
 			
 			humour_bar.value += rand_humor
 			card.update_score_text(rand_humor)
@@ -179,10 +176,16 @@ func handle_common_card_actions(slot: CardSlot, card: Card, data: Variant) -> vo
 			print(audience_size)
 			humour_bar.value += data["effect"]["comedy"] * audience_size
 			card.update_score_text(data["effect"]["comedy"] * audience_size)
+		"double_down":
+			const locations = ["Stage", "Commoners", "Court", "King"]
+			var mult = 1 if locations[slot.location] == "Commoners" else -1
+			commoner_attitude -= 20 * mult
+			court_attitude += 20 * mult
+			sounds.gasp(randf())
 			
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
-	var num_bad_reactions: int = precalculate_bad_reactions()
+	var num_reactions: int = precalculate_reactions()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
 	else:
 		if net_humour < 0:
@@ -196,8 +199,8 @@ func advance_round() -> void:
 	
 		match data["card_id"]:
 			"read_the_room":
-				if cards_to_draw <= 0: cards_to_draw = num_bad_reactions + 1
-				else: cards_to_draw += num_bad_reactions
+				if cards_to_draw <= 0: cards_to_draw = num_reactions + 1
+				else: cards_to_draw += num_reactions
 			_:
 				handle_common_card_actions(slot, slot.contents.back(), data)
 				
