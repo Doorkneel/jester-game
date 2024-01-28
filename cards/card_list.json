@@ -109,11 +109,11 @@
 		"name" : "Setup",
 		"zone" : "jester",
 		"type" : "setup",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "Play a punchline on this",
 		"effect" : {
-			"comedy" : 10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"comedy" : 0,
+			"commonerFavour" : 0,
+			"courtFavour" : 0
 		}
 	},
 	"stage_fright" : {

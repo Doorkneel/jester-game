@@ -54,13 +54,12 @@ func load_card():
 	if card_data["zone"] == "jester":
 		if card_data.has("type"):
 			card_frame_name = "jester_" + card_data["type"] + "_frame"
-		else:	
+		else:
 			card_frame_name = "jester_frame"
 	else:
 		card_frame_name = card_data["zone"] + "_frame"
 	
 	card_frame.texture = load(card_frame_loc + card_frame_name + ".png")
-	
 	
 	card_name.text = card_data["name"]
 	rules_text.text = card_data["rules_text"]

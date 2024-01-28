@@ -110,7 +110,8 @@ func precalculate_net_humour() -> int:
 	for slot in stage_slots + court_slots + commoner_slots: # TODO loop over king too?
 		var data = get_slot_data(slot)
 		if not data: continue
-		net_humour += data["effect"]["comedy"]
+		if data["effect"].has("comedy"):
+			net_humour += data["effect"]["comedy"]
 	return net_humour
 
 func animate_humour_bonus(slot: CardSlot) -> void:
@@ -135,12 +136,14 @@ func advance_round() -> void:
 		var data = get_slot_data(slot)
 		if not data: continue
 		
-		humour_bar.value += data["effect"]["comedy"]
+		if data["effect"].has("comedy"):
+			humour_bar.value += data["effect"]["comedy"]
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
 		await animate_humour_bonus(slot)
-		free_slot(slot)
+		if !(get_slot_data(slot).has("type") && get_slot_data(slot)["type"] == "setup"):
+			free_slot(slot)
 	
 	# commoner cards
 	for slot in commoner_slots:
