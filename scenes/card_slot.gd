@@ -6,10 +6,13 @@ signal slot_hovered(id: int, this: CardSlot)
 @export_enum("Stage", "Commoners", "Court", "King") var location: int
 
 @onready var sprite: Sprite2D = $Sprite as Sprite2D
+@onready var glow: Panel = $Highlight as Panel
 
 var contents: Array[Card] = []
 
 func _ready() -> void:
+	show_highlight(false)
+	
 	# TODO set visuals depending on location
 	match location:
 		0: sprite.modulate = Color(0.6, 0.6, 0)
@@ -23,7 +26,5 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	slot_hovered.emit(self.get_instance_id(), null)
 
-func highlight() -> void:
-	# TODO visually highlight slot; told to do so by the card being dragged
-	# if that card may be placed here
-	pass
+func show_highlight(visible: bool) -> void:
+	glow.visible = visible

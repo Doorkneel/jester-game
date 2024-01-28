@@ -10,6 +10,12 @@ signal card_returned_to_hand(this: Card)
 @onready var card_frame: Sprite2D = $Frame as Sprite2D
 @onready var card_name: Label = $Name as Label
 @onready var rules_text: Label = $RulesText as Label
+@onready var score_text: Label = $Score as Label
+
+@onready var anim: AnimationPlayer = $AnimationPlayer as AnimationPlayer
+
+@export var good_color : Color
+@export var bad_color : Color
 
 @export var card_list_json: JSON
 var card_data
@@ -18,6 +24,7 @@ const card_art_loc: String = "res://assets/art/"
 const card_frame_loc: String = "res://assets/frames/"
 
 var card_id
+var comedy
 
 var pos_in_hand: int = -1
 var current_slot: CardSlot
@@ -45,6 +52,9 @@ func load_card():
 	card_frame.texture = load(card_frame_loc + card_data["type"] + "_frame.png")
 	card_name.text = card_data["name"]
 	rules_text.text = card_data["rules_text"]
+	comedy = card_data["effect"]["comedy"]
+	score_text.text = ("+" if comedy > 0 else "") + str(comedy)
+	score_text.add_theme_color_override("font_color", good_color if comedy > 0 else bad_color)
 
 func _ready() -> void:
 	if not desired_position: desired_position = position
@@ -120,9 +130,18 @@ func play_to_slot(slot: CardSlot) -> void:
 		desired_position = slot.global_position
 		desired_rotation = slot.global_rotation
 		slot.contents.append(self)
+		z_index = len(slot.contents)
 		card_played_to_slot.emit(self)
 		highlighted_slot = null
 	else:
 		# return card to hand
 		card_returned_to_hand.emit(self)
 		should_return_to_hand = false
+		
+	
+func show_comedy_score():
+	anim.play("score")
+
+
+func _on_animation_player_animation_finished(anim_name):
+	pass # Replace with function body.

@@ -28,6 +28,9 @@ extends Node
 
 const card_scene = preload("res://scenes/card.tscn")
 
+const pause_on_card: float = 0.8
+const initial_humour: int = 5
+
 # starting cards
 @export var starting_cards = {
 	"quip": 3,
@@ -42,7 +45,7 @@ var commoner_attitude: int = 0
 var court_attitude: int = 0
 
 # main game counters
-var humour: int = 5
+# (humour level is found in humour_bar.value)
 var rounds_remaining: int = 7
 
 # current deck and hand
@@ -53,7 +56,7 @@ var cards_to_draw: int = 5
 func _ready() -> void:
 	# initialize UI
 	rounds_label.text = str(rounds_remaining)
-	humour_bar.value = humour
+	humour_bar.value = initial_humour
 	
 	# connect card signals
 	for card in get_tree().get_nodes_in_group("cards") as Array[Card]:
@@ -86,33 +89,85 @@ func _on_card_returned_to_hand(card: Card) -> void:
 	card.pos_in_hand = len(hand) - 1
 	layout_hand()
 
+func get_slot_data(slot: CardSlot) -> Variant:
+	if len(slot.contents) == 0: return null
+	return slot.contents[len(slot.contents) - 1].card_data
+
+func free_slot(slot: CardSlot) -> void:
+	while len(slot.contents) > 0:
+		var c = slot.contents.pop_front()
+		c.queue_free()
+
+func precalculate_net_humour() -> int:
+	var net_humour: int = 0
+	for slot in stage_slots + court_slots + commoner_slots: # TODO loop over king too?
+		var data = get_slot_data(slot)
+		if not data: continue
+		net_humour += data["effect"]["comedy"]
+	return net_humour
+
 func advance_round() -> void:
-	rounds_remaining -= 1
+	var net_humour: int = precalculate_net_humour()
+	if humour_bar.value + net_humour <= 0: sounds.boo()
+	else: sounds.laugh(min(net_humour / 40.0, 1)) # TODO tweak formula
 	
-	if rounds_remaining <= 0:
-		# TODO Game over state!
-		pass
-	else:
-		rounds_label.text = str(rounds_remaining)
+	# stage cards
+	for slot in stage_slots:
+		var data = get_slot_data(slot)
+		if not data: continue
 		
-		for slot in stage_slots + court_slots + commoner_slots:
-			var top_card = slot.contents.pop_back()
-			if not top_card: continue
-			
-			# TODO take card effects
-			pass
-			
-			top_card.queue_free()
-			while len(slot.contents) > 0:
-				var c = slot.contents.pop_back()
-				c.queue_free()
+		slot.show_highlight(true)
+		humour_bar.value += data["effect"]["comedy"]
+		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
+		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		# TODO take king card effect
-		pass
+		await get_tree().create_timer(pause_on_card).timeout # TODO rather await Daniel's +10 animation
+		slot.show_highlight(false)
+		free_slot(slot)
+	
+	# commoner cards
+	for slot in commoner_slots:
+		var data = get_slot_data(slot)
+		if not data: continue
 		
-		sounds.laugh(randf()) # TODO adjust magnitude based on success
-		draw_card()
-		populate_audience()
+		slot.show_highlight(true)
+		humour_bar.value += data["effect"]["comedy"]
+		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
+		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
+		
+		await get_tree().create_timer(pause_on_card).timeout
+		slot.show_highlight(false)
+		free_slot(slot)
+	
+		# court cards
+	for slot in court_slots:
+		var data = get_slot_data(slot)
+		if not data: continue
+		
+		slot.show_highlight(true)
+		humour_bar.value += data["effect"]["comedy"]
+		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
+		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
+		
+		await get_tree().create_timer(pause_on_card).timeout
+		slot.show_highlight(false)
+		free_slot(slot)
+	
+	# king card
+	pass
+	
+	check_for_win_or_loss()
+
+func check_for_win_or_loss() -> void:
+	rounds_remaining -= 1
+	if humour_bar.value >= 100: pass # TODO trigger WIN!
+	elif rounds_remaining <= 0 or humour_bar.value <= 0: pass # TODO trigger LOSS!
+	else: begin_next_round()
+
+func begin_next_round() -> void:
+	rounds_label.text = str(rounds_remaining)
+	draw_card()
+	populate_audience()
 
 func adjust_attitude(audience, favour) -> void:
 	if audience == "court":
@@ -172,6 +227,7 @@ func populate_audience():
 		
 		new_card.card_id = "offense"
 		new_card.interactable = false
+		if new_card.card_id == "offense": sounds.gasp(randf())
 		
 		await get_tree().create_timer(0.25).timeout
 		add_child(new_card)
