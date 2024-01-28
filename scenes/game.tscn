@@ -112,13 +112,6 @@ location = 1
 position = Vector2(61, 0)
 location = 1
 
-[node name="King" type="Node2D" parent="."]
-position = Vector2(576, 118)
-metadata/_edit_group_ = true
-
-[node name="King" parent="King" instance=ExtResource("2_3wt2b")]
-location = 3
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Rounds" type="Label" parent="CanvasLayer"]
