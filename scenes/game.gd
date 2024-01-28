@@ -98,7 +98,7 @@ func _on_card_returned_to_hand(card: Card) -> void:
 
 func get_slot_data(slot: CardSlot) -> Variant:
 	if len(slot.contents) == 0: return null
-	return slot.contents[len(slot.contents) - 1].card_data
+	return slot.contents.front().card_data
 
 func free_slot(slot: CardSlot) -> void:
 	while len(slot.contents) > 0:
@@ -114,8 +114,8 @@ func precalculate_net_humour() -> int:
 	return net_humour
 
 func animate_humour_bonus(slot: CardSlot) -> void:
-	var top_card: Card = slot.contents[len(slot.contents) - 1]
-	if top_card.card_id == "cheer_commoners" or top_card.card_id == "cheer_court": return
+	var top_card: Card = slot.contents.front()
+	if top_card.card_data["effect"]["comedy"] == 0: return
 	slot.show_highlight(true)
 	top_card.show_comedy_score()
 	await top_card.anim.animation_finished
@@ -124,7 +124,11 @@ func animate_humour_bonus(slot: CardSlot) -> void:
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
-	else: sounds.laugh(min(net_humour / 40.0, 1)) # TODO tweak formula
+	else:
+		if net_humour < 0:
+			sounds.gasp(0)
+			sounds.laugh(0)
+		else: sounds.laugh(min(net_humour / 45.0, 1)) # TODO tweak formula
 	
 	# stage cards
 	for slot in stage_slots:
@@ -192,7 +196,7 @@ func get_audience_cards(audience) -> Array[String]:
 	
 	var cards: Array[String] = []
 	for i in range(2):
-		if randf() < ease_in_out(abs(attitude) / 70): cards.append(sentiment)
+		if randf() < ease_in_out(abs(attitude) / 70.0): cards.append(sentiment)
 		else: cards.append("NONE")
 	return cards
 
