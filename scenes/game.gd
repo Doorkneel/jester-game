@@ -27,6 +27,8 @@ extends Node
 @onready var commoner_cards_data = commoner_json.get_data() if commoner_json else null
 
 const card_scene = preload("res://scenes/card.tscn")
+var win_scene = load("res://scenes/win.tscn")
+var loss_scene = load("res://scenes/loss.tscn")
 
 const pause_on_card: float = 0.8
 const initial_humour: int = 5
@@ -174,9 +176,9 @@ func advance_round() -> void:
 func check_for_win_or_loss() -> void:
 	rounds_remaining -= 1
 	if humour_bar.value >= 100:
-		pass
+		get_tree().change_scene_to_packed(win_scene)
 	elif rounds_remaining <= 0 or humour_bar.value <= 0:
-		pass
+		get_tree().change_scene_to_packed(loss_scene)
 	else: begin_next_round()
 
 func begin_next_round() -> void:
