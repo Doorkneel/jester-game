@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=3 uid="uid://du1ufi1inyv0e"]
+
+[ext_resource type="FontFile" uid="uid://c3syvr3xbve25" path="res://assets/Magic Sound.ttf" id="1_4jxce"]
+[ext_resource type="Script" path="res://scenes/loss.gd" id="1_rnoso"]
+[ext_resource type="FontFile" uid="uid://3qnfqecml1m" path="res://assets/Skincake.ttf" id="2_a3ln2"]
+[ext_resource type="PackedScene" uid="uid://4txe3eyg25bs" path="res://scenes/sounds.tscn" id="3_efkd4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3kd7"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or57r"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_griq0"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwcrn"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xuj6w"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj0fb"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2xkp"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2f44"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[node name="Loss" type="CanvasLayer"]
+script = ExtResource("1_rnoso")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 146.0
+offset_top = 161.0
+offset_right = 1019.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("1_4jxce")
+theme_override_font_sizes/font_size = 42
+text = "The king is NOT amused!"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 308.0
+offset_top = 285.0
+offset_right = 879.0
+offset_bottom = 329.0
+theme_override_fonts/font = ExtResource("2_a3ln2")
+theme_override_font_sizes/font_size = 36
+text = "Your head will roll for this :("
+
+[node name="Replay" type="Button" parent="."]
+offset_left = 341.0
+offset_top = 401.0
+offset_right = 534.0
+offset_bottom = 476.0
+theme_override_colors/font_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_colors/font_focus_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_fonts/font = ExtResource("1_4jxce")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3kd7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_or57r")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_griq0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iwcrn")
+text = "Play Again"
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 564.0
+offset_top = 401.0
+offset_right = 757.0
+offset_bottom = 476.0
+theme_override_colors/font_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_colors/font_focus_color = Color(1, 0.858824, 0.298039, 1)
+theme_override_fonts/font = ExtResource("1_4jxce")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xuj6w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vj0fb")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_a2xkp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_b2f44")
+text = "Quit"
+
+[node name="Sounds" parent="." instance=ExtResource("3_efkd4")]
+play_sad_horn = true
+
+[connection signal="pressed" from="Replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
