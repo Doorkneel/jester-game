@@ -127,14 +127,14 @@ func can_play_to_slot(slot: CardSlot) -> bool:
 	if locations[slot.location] == "Court":
 		if len(slot.contents) == 0: return false
 		var top_card = slot.contents.front().card_id
-		return top_card == "cheer_court" or top_card == "offense" \
-			and (card_id == "double_down" or card_id == "roast")
+		if top_card == "offense": return card_id == "double_down" or card_id == "roast"
+		return top_card == "cheer_court" and not (card_id == "double_down" or card_id == "roast")
 	
 	if locations[slot.location] == "Commoners":
 		if len(slot.contents) == 0: return false
 		var top_card = slot.contents.front().card_id
-		return top_card == "cheer_commoners" or top_card == "heckle" \
-			and (card_id == "double_down" or card_id == "roast")
+		if top_card == "heckle": return card_id == "double_down" or card_id == "roast"
+		return top_card == "cheer_commoners" and not (card_id == "double_down" or card_id == "roast")
 	
 	return card_id != "roast" and card_id != "double_down" and len(slot.contents) == 0
 

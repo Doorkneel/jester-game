@@ -114,8 +114,9 @@ func precalculate_net_humour() -> int:
 	return net_humour
 
 func animate_humour_bonus(slot: CardSlot) -> void:
-	slot.show_highlight(true)
 	var top_card: Card = slot.contents[len(slot.contents) - 1]
+	if top_card.card_id == "cheer_commoners" or top_card.card_id == "cheer_court": return
+	slot.show_highlight(true)
 	top_card.show_comedy_score()
 	await top_card.anim.animation_finished
 	slot.show_highlight(false)
@@ -191,7 +192,7 @@ func get_audience_cards(audience) -> Array[String]:
 	
 	var cards: Array[String] = []
 	for i in range(2):
-		if randf() < ease_in_out(abs(attitude) / 80): cards.append(sentiment)
+		if randf() < ease_in_out(abs(attitude) / 70): cards.append(sentiment)
 		else: cards.append("NONE")
 	return cards
 
@@ -225,7 +226,7 @@ func populate_audience():
 		var new_card: Card = card_scene.instantiate()
 		new_card.interactable = false
 		
-		if commoner_card_quality[i] == "GOOD": new_card.card_id = "heckle" # TODO replace with "cheer_commoners"
+		if commoner_card_quality[i] == "GOOD": new_card.card_id = "cheer_commoners"
 		else: new_card.card_id = "heckle"
 		
 		await get_tree().create_timer(0.25).timeout
@@ -237,7 +238,7 @@ func populate_audience():
 		var new_card: Card = card_scene.instantiate()
 		new_card.interactable = false
 		
-		if court_card_quality[i] == "GOOD": new_card.card_id = "offense" # TODO replace with "cheer_court"
+		if court_card_quality[i] == "GOOD": new_card.card_id = "cheer_court"
 		else: new_card.card_id = "offense"
 		
 		if new_card.card_id == "offense": sounds.gasp(randf())
