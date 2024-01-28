@@ -143,8 +143,9 @@ func handle_common_card_actions(data: Variant) -> void:
 	match data["card_id"]:
 		"improv":
 			cards_to_draw = 3
-		# TODO add more cards' logic here
-
+		"gallows_humour":
+			humour_bar.value -= data["effect"]["comedy"]
+			
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
 	if humour_bar.value + net_humour <= 0: sounds.boo()

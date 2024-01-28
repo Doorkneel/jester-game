@@ -154,8 +154,8 @@
 		"rules_text" : "Decreases favour of target class, \n increases favour of the other",
 		"effect" : {
 			"comedy": 10,
-			"commonerFavour" : 10,
-			"courtFavour" : -10
+			"commonerFavour" : 0,
+			"courtFavour" : 0
 		}
 	},
 	"political_humour" : {
