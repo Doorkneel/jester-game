@@ -35,15 +35,15 @@ const initial_humour: int = 5
 # starting cards
 @export var starting_cards = {
 	"quip": 6,
-	"setup": 14,
+	"setup": 10,
 	"toilet_humour": 3,
 	"political_humour": 3,
 	"crowd_work": 3,
 	"roast": 3,
 	"prop_humour" : 2,
-	"improv" : 4,
+	"improv" : 8,
 	"double_down" : 2,
-	"read_the_room" : 3,
+	"read_the_room" : 4,
 	"gallows_humour" : 3,
 	"naughty_joke" : 3
 }
@@ -54,7 +54,7 @@ var court_attitude: int = 0
 
 # main game counters
 # (humour level is found in humour_bar.value)
-var rounds_remaining: int = 7
+var rounds_remaining: int = 9
 var current_king: String
 
 # current deck and hand
