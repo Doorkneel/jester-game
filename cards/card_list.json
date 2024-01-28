@@ -175,7 +175,7 @@
 		"type" : "misc",
 		"rules_text" : "+2 Cards",
 		"effect" : {
-			"comedy": 10,
+			"comedy": 0,
 			"commonerFavour" : 0,
 			"courtFavour" : 0
 		}

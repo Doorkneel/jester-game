@@ -106,7 +106,9 @@ func _on_card_returned_to_hand(card: Card) -> void:
 
 func get_slot_data(slot: CardSlot) -> Variant:
 	if len(slot.contents) == 0: return null
-	return slot.contents.back().card_data
+	var data = slot.contents.back().card_data
+	data["card_id"] = slot.contents.back().card_id
+	return data
 
 func free_slot(slot: CardSlot) -> void:
 	if slot.contents.back().card_data["type"] == "setup": return
@@ -133,6 +135,16 @@ func animate_humour_bonus(slot: CardSlot) -> void:
 	await top_card.anim.animation_finished
 	slot.show_highlight(false)
 
+func handle_common_card_actions(data: Variant) -> void:
+	humour_bar.value += data["effect"]["comedy"]
+	if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
+	if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
+	
+	match data["card_id"]:
+		"improv":
+			cards_to_draw = 3
+		# TODO add more cards' logic here
+
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
@@ -146,34 +158,21 @@ func advance_round() -> void:
 	for slot in stage_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		
-		if data["effect"].has("comedy"):
-			humour_bar.value += data["effect"]["comedy"]
-		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
-		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
-		
+		handle_common_card_actions(data)
 		await free_slot(slot)
 	
 	# commoner cards
 	for slot in commoner_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		
-		humour_bar.value += data["effect"]["comedy"]
-		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
-		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
-		
+		handle_common_card_actions(data)
 		await free_slot(slot)
 	
 		# court cards
 	for slot in court_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		
-		humour_bar.value += data["effect"]["comedy"]
-		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
-		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
-		
+		handle_common_card_actions(data)
 		await free_slot(slot)
 	
 	# king card
@@ -191,7 +190,8 @@ func check_for_win_or_loss() -> void:
 
 func begin_next_round() -> void:
 	rounds_label.text = str(rounds_remaining)
-	draw_card()
+	if cards_to_draw <= 0: draw_card()
+	else: card_draw_timer.start() # trigger multiple card draw
 	populate_audience()
 
 func adjust_attitude(audience, favour) -> void:
