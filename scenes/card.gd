@@ -83,7 +83,6 @@ func _process(_delta) -> void:
 	else: rotation += rot_delta * rotation_speed
 
 func _on_mouse_entered() -> void:
-	show_comedy_score()
 	if interactable: being_hovered = true
 
 func _on_mouse_exited() -> void:
