@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://4txe3eyg25bs"]
+[gd_scene load_steps=20 format=3 uid="uid://4txe3eyg25bs"]
 
 [ext_resource type="Script" path="res://scenes/sounds.gd" id="1_f26rj"]
 [ext_resource type="AudioStream" uid="uid://x4ns56m5f0k1" path="res://assets/sounds/smallest.mp3" id="2_shoa8"]
@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://dgr70fwbbwm5" path="res://assets/sounds/gasp_worry.wav" id="15_0r0ls"]
 [ext_resource type="AudioStream" uid="uid://bqsha8ehb85rw" path="res://assets/sounds/gasp_shock.wav" id="16_xd02u"]
 [ext_resource type="AudioStream" uid="uid://bpj3672d58205" path="res://assets/sounds/crickets.wav" id="17_aj6di"]
+[ext_resource type="AudioStream" uid="uid://fvyqtp83u8cu" path="res://assets/sounds/party.mp3" id="18_bc3g4"]
+[ext_resource type="AudioStream" uid="uid://bka0y5ncivbdg" path="res://assets/sounds/sad_horn.mp3" id="19_1hjer"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_f26rj")
@@ -46,6 +48,7 @@ max_polyphony = 10
 
 [node name="Boo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_d8hr0")
+volume_db = -4.0
 
 [node name="Chattering" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_nos28")
@@ -58,7 +61,6 @@ max_polyphony = 10
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_ueh38")
 volume_db = -4.0
-autoplay = true
 
 [node name="GaspNeutral" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_jb0go")
@@ -74,3 +76,9 @@ stream = ExtResource("16_xd02u")
 
 [node name="Crickets" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_aj6di")
+
+[node name="Party" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_bc3g4")
+
+[node name="SadHorn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_1hjer")
