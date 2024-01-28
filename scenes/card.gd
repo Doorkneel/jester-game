@@ -48,6 +48,10 @@ const slide_speed: float = 0.6
 const rotation_speed: float = 0.2
 const snap_strength: float = 0.7
 
+func update_score_text(comedy: int) -> void:
+	score_text.text = ("+" if comedy > 0 else "") + str(comedy)
+	score_text.add_theme_color_override("font_color", good_color if comedy > 0 else bad_color)
+
 func load_card():
 	card_data = card_list_json.get_data()[card_id]
 	card_art.texture = load(card_art_loc + card_id + ".png")
@@ -66,8 +70,7 @@ func load_card():
 	card_name.text = card_data["name"]
 	rules_text.text = card_data["rules_text"]
 	comedy = card_data["effect"]["comedy"]
-	score_text.text = ("+" if comedy > 0 else "") + str(comedy)
-	score_text.add_theme_color_override("font_color", good_color if comedy > 0 else bad_color)
+	update_score_text(comedy)
 
 func _ready() -> void:
 	if not desired_position: desired_position = position
