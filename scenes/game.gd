@@ -47,7 +47,7 @@ var court_attitude: int = 0
 
 # main game counters
 # (humour level is found in humour_bar.value)
-var rounds_remaining: int = 7
+var rounds_remaining: int = 5
 
 # current deck and hand
 var deck: Array[String] = []
@@ -168,8 +168,10 @@ func advance_round() -> void:
 
 func check_for_win_or_loss() -> void:
 	rounds_remaining -= 1
-	if humour_bar.value >= 100: pass # TODO trigger WIN!
-	elif rounds_remaining <= 0 or humour_bar.value <= 0: pass # TODO trigger LOSS!
+	if humour_bar.value >= 100:
+		pass # TODO trigger WIN!
+	elif rounds_remaining <= 0 or humour_bar.value <= 0:
+		pass # TODO trigger LOSS!
 	else: begin_next_round()
 
 func begin_next_round() -> void:
@@ -189,7 +191,7 @@ func get_audience_cards(audience) -> Array[String]:
 	
 	var cards: Array[String] = []
 	for i in range(2):
-		if randf() < ease_in_out(abs(attitude) / 40): cards.append(sentiment)
+		if randf() < ease_in_out(abs(attitude) / 80): cards.append(sentiment)
 		else: cards.append("NONE")
 	return cards
 
@@ -219,28 +221,30 @@ func populate_audience():
 	var court_card_quality = get_audience_cards("court")
 	
 	for i in range(len(commoner_slots)):
-		var slot = commoner_slots[i]
+		if commoner_card_quality[i] == "NONE": continue
 		var new_card: Card = card_scene.instantiate()
-		
-		new_card.card_id = "heckle" # TODO temp
 		new_card.interactable = false
+		
+		if commoner_card_quality[i] == "GOOD": new_card.card_id = "heckle" # TODO replace with "cheer_commoners"
+		else: new_card.card_id = "heckle"
 		
 		await get_tree().create_timer(0.25).timeout
 		add_child(new_card)
-		new_card.play_to_slot(slot)
+		new_card.play_to_slot(commoner_slots[i])
 		
 	for i in range(len(court_slots)):
-		var slot = court_slots[i]
+		if court_card_quality[i] == "NONE": continue
 		var new_card: Card = card_scene.instantiate()
-		
-		new_card.card_id = "offense" # TODO temp
 		new_card.interactable = false
+		
+		if court_card_quality[i] == "GOOD": new_card.card_id = "offense" # TODO replace with "cheer_court"
+		else: new_card.card_id = "offense"
 		
 		if new_card.card_id == "offense": sounds.gasp(randf())
 		
 		await get_tree().create_timer(0.25).timeout
 		add_child(new_card)
-		new_card.play_to_slot(slot)
+		new_card.play_to_slot(court_slots[i])
 
 func _on_card_played_to_slot(card: Card) -> void:
 	sounds.card_play()
