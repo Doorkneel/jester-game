@@ -137,7 +137,7 @@ func can_play_to_slot(slot: CardSlot) -> bool:
 	
 	if card_data["type"] == "punchline":
 		if len(slot.contents) > 0:
-			return slot.contents.front().card_data["type"] == "setup"
+			return slot.contents.back().card_data["type"] == "setup"
 		else:
 			return false
 

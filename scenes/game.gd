@@ -37,7 +37,7 @@ const initial_humour: int = 5
 @export var starting_cards = {
 	"quip": 5,
 	"naughty_joke": 3,
-	"setup": 3,
+	"setup": 4,
 	"toilet_humour": 2,
 	"crowd_work": 3,
 	"roast": 3
@@ -103,6 +103,9 @@ func get_slot_data(slot: CardSlot) -> Variant:
 	return slot.contents.back().card_data
 
 func free_slot(slot: CardSlot) -> void:
+	if slot.contents.back().card_data["type"] == "setup": return
+	
+	await animate_humour_bonus(slot)	
 	while len(slot.contents) > 0:
 		var c = slot.contents.pop_front()
 		c.queue_free()
@@ -143,9 +146,7 @@ func advance_round() -> void:
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		await animate_humour_bonus(slot)
-		if slot.contents.back().card_data["type"] != "setup":
-			free_slot(slot)
+		await free_slot(slot)
 	
 	# commoner cards
 	for slot in commoner_slots:
@@ -156,8 +157,7 @@ func advance_round() -> void:
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		await animate_humour_bonus(slot)
-		free_slot(slot)
+		await free_slot(slot)
 	
 		# court cards
 	for slot in court_slots:
@@ -168,8 +168,7 @@ func advance_round() -> void:
 		if data["effect"]["commonerFavour"]: commoner_attitude += data["effect"]["commonerFavour"]
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
-		await animate_humour_bonus(slot)
-		free_slot(slot)
+		await free_slot(slot)
 	
 	# king card
 	pass
