@@ -72,10 +72,10 @@
 		"name" : "Offense",
 		"zone" : "court",
 		"type" : "status",
-		"rules_text" : "-15 comedy",
+		"rules_text" : "-15 Comedy",
 		"effect" : {
 			"comedy" : -10,
-			"commonerFavour" : 10,
+			"commonerFavour" : 0,
 			"courtFavour" : 0,
 			"quality" : "bad"
 		}
@@ -84,18 +84,18 @@
 		"name" : "Quip",
 		"zone" : "jester",
 		"type" : "misc",
-		"rules_text" : "+10 comedy",
+		"rules_text" : "+10 Comedy. Not very popular.",
 		"effect" : {
 			"comedy" : 10,
-			"commonerFavour" : 0,
-			"courtFavour" : 0
+			"commonerFavour" : -10,
+			"courtFavour" : -10
 		}
 	},
 	"read_the_room" : {
 		"name" : "Read the room",
 		"zone" : "jester",
 		"type" : "misc",
-		"rules_text" : "+1 card for  \nevery Heckle/Offense",
+		"rules_text" : "+1 card for\nevery audience reaction",
 		"effect" : {
 			"comedy" : 0,
 			"commonerFavour" : 10,
@@ -105,7 +105,7 @@
 	"roast" : {
 		"name" : "Roast",
 		"zone" : "jester",
-		"rules_text" : "+20 Comedy. \nPlayable on Heckle/Offense",
+		"rules_text" : "+20 Comedy.\nPlayable on Heckle/Offense",
 		"type" : "misc",
 		"effect" : {
 			"comedy" : 10,
@@ -140,7 +140,7 @@
 		"name" : "Toilet Humour",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "+15 comedy. \n Favours commoners.",
+		"rules_text" : "+15 Comedy.\nFavours commoners.",
 		"effect" : {
 			"comedy" : 15,
 			"commonerFavour" : 20,
@@ -151,7 +151,7 @@
 		"name" : "Double Down",
 		"zone" : "jester",
 		"type" : "misc",
-		"rules_text" : "Decreases favour of target class, \n increases favour of the other",
+		"rules_text" : "Loses favour of target class, while gaining\nfavour of the other",
 		"effect" : {
 			"comedy": 10,
 			"commonerFavour" : 0,
@@ -162,7 +162,7 @@
 		"name" : "Politcal Humour",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "+15 comedy. \nFavours court",
+		"rules_text" : "+15 Comedy.\nFavours court",
 		"effect" : {
 			"comedy": 10,
 			"commonerFavour" : -20,
@@ -184,7 +184,7 @@
 		"name" : "Prop Humour",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "+10 Comedy for \neach card in hand",
+		"rules_text" : "+10 Comedy for\neach card in hand",
 		"effect" : {
 			"comedy": 10,
 			"commonerFavour" : 0,
