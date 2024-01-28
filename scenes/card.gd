@@ -38,6 +38,7 @@ var interactable: bool = true
 var being_hovered: bool = false
 var being_dragged: bool = false
 var should_return_to_hand: bool = false
+var old_z_index: float = 0
 
 # Target position & rotation for animation
 var desired_position: Vector2
@@ -103,13 +104,14 @@ func _input(_event) -> void:
 	if Input.is_action_just_pressed("click"):
 		if being_hovered and not card_being_dragged and interactable:
 			being_dragged = true
+			old_z_index = z_index
 			z_index = 1000
 			card_picked_up.emit(self)
 			card_being_dragged = self
 	elif Input.is_action_just_released("click"):
 		if being_dragged:
 			being_dragged = false
-			z_index = 0 if pos_in_hand < 0 else pos_in_hand
+			z_index = old_z_index
 			card_released.emit(self)
 			card_being_dragged = null
 			
@@ -143,26 +145,26 @@ func can_play_to_slot(slot: CardSlot) -> bool:
 
 	if locations[slot.location] == "Court":
 		if len(slot.contents) == 0: return false
-		var top_card = slot.contents.front().card_id
+		var top_card = slot.contents.back().card_id
 		if top_card == "offense": return card_id == "double_down" or card_id == "roast"
 		return top_card == "cheer_court" and not (card_id == "double_down" or card_id == "roast")
 	
 	if locations[slot.location] == "Commoners":
 		if len(slot.contents) == 0: return false
-		var top_card = slot.contents.front().card_id
+		var top_card = slot.contents.back().card_id
 		if top_card == "heckle": return card_id == "double_down" or card_id == "roast"
 		return top_card == "cheer_commoners" and not (card_id == "double_down" or card_id == "roast")
 	
 	if locations[slot.location] == "Stage":
-		if len(slot.contents) == 0: return true
-		var top_card = slot.contents.front().card_id
-		if top_card == "setup": return card_data["type"] == "punchline"
+		if len(slot.contents) > 0:
+			var top_card = slot.contents.back().card_id
+			if top_card == "setup": return card_data["type"] == "punchline"
 	
 	return card_id != "roast" and card_id != "double_down" and len(slot.contents) == 0
 
 func play_to_slot(slot: CardSlot) -> void:
 	# remove card from old slot
-	if current_slot: current_slot.contents.pop_front()
+	if current_slot: current_slot.contents.pop_back()
 	current_slot = slot
 	
 	if slot:
