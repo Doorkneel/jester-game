@@ -24,7 +24,7 @@
 		"type" : "commoner",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
-			"comedy" : 10,
+			"comedy" : -10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10,
 			"quality" : "bad"
@@ -45,7 +45,7 @@
 		"type" : "court",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
-			"comedy" : 10,
+			"comedy" : -10,
 			"commonerFavour" : 20,
 			"courtFavour" : -10,
 			"quality" : "bad"
