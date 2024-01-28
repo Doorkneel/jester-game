@@ -98,7 +98,7 @@ func _on_card_returned_to_hand(card: Card) -> void:
 
 func get_slot_data(slot: CardSlot) -> Variant:
 	if len(slot.contents) == 0: return null
-	return slot.contents.front().card_data
+	return slot.contents.back().card_data
 
 func free_slot(slot: CardSlot) -> void:
 	while len(slot.contents) > 0:
@@ -115,7 +115,7 @@ func precalculate_net_humour() -> int:
 	return net_humour
 
 func animate_humour_bonus(slot: CardSlot) -> void:
-	var top_card: Card = slot.contents.front()
+	var top_card: Card = slot.contents.back()
 	if top_card.card_data["effect"]["comedy"] == 0: return
 	slot.show_highlight(true)
 	top_card.show_comedy_score()
@@ -142,7 +142,7 @@ func advance_round() -> void:
 		if data["effect"]["courtFavour"]: court_attitude += data["effect"]["courtFavour"]
 		
 		await animate_humour_bonus(slot)
-		if !(get_slot_data(slot).has("type") && get_slot_data(slot)["type"] == "setup"):
+		if slot.contents.back().card_data["type"] != "setup":
 			free_slot(slot)
 	
 	# commoner cards

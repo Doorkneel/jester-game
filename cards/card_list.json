@@ -2,6 +2,7 @@
 	"cheer_commoners" : {
 		"name": "Cheer",
 		"zone": "commoner",
+		"type" : "status",
 		"rules_text": "You can play on this",
 		"effect" : {
 			"comedy" : 0,
@@ -13,6 +14,7 @@
 	"cheer_court" : {
 		"name": "Cheer",
 		"zone": "court",
+		"type" : "status",
 		"rules_text": "You can play on this",
 		"effect" : {
 			"comedy" : 0,
@@ -25,6 +27,7 @@
 		"name" : "Crowd Work",
 		"zone" : "jester",
 		"rules_text" : "Add 5 comedy",
+		"type": "misc",
 		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
@@ -45,6 +48,7 @@
 	"heckle" : {
 		"name" : "Heckle",
 		"zone" : "commoner",
+		"type" : "status",
 		"rules_text" : "Remove 5 comedy",
 		"effect" : {
 			"comedy" : -10,
@@ -67,6 +71,7 @@
 	"offense" : {
 		"name" : "Offense",
 		"zone" : "court",
+		"type" : "status",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
 			"comedy" : -10,
@@ -78,6 +83,7 @@
 	"quip" : {
 		"name" : "Quip",
 		"zone" : "jester",
+		"type" : "misc",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
 			"comedy" : 10,
@@ -88,6 +94,7 @@
 	"read_the_room" : {
 		"name" : "Read the room",
 		"zone" : "jester",
+		"type" : "misc",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
 			"comedy" : 10,
@@ -99,6 +106,7 @@
 		"name" : "Roast",
 		"zone" : "jester",
 		"rules_text" : "Add 5 comedy",
+		"type" : "misc",
 		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
@@ -119,6 +127,7 @@
 	"stage_fright" : {
 		"name" : "Stage Fright",
 		"zone" : "jester",
+		"type" : "status",
 		"rules_text" : "Add 5 comedy",
 		"effect" : {
 			"comedy" : 10,

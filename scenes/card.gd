@@ -52,7 +52,7 @@ func load_card():
 	
 	var card_frame_name
 	if card_data["zone"] == "jester":
-		if card_data.has("type"):
+		if card_data["type"] == "setup" or card_data["type"] == "punchline":
 			card_frame_name = "jester_" + card_data["type"] + "_frame"
 		else:
 			card_frame_name = "jester_frame"
@@ -133,7 +133,13 @@ func _on_hand_hitbox_exited() -> void:
 
 func can_play_to_slot(slot: CardSlot) -> bool:
 	const locations = ["Stage", "Commoners", "Court", "King"]
-	if locations[slot.location] == "King": return false # TODO add exceptions?
+	if locations[slot.location] == "King": return false
+	
+	if card_data["type"] == "punchline":
+		if len(slot.contents) > 0:
+			return slot.contents.front().card_data["type"] == "setup"
+		else:
+			return false
 
 	if locations[slot.location] == "Court":
 		if len(slot.contents) == 0: return false
@@ -146,6 +152,11 @@ func can_play_to_slot(slot: CardSlot) -> bool:
 		var top_card = slot.contents.front().card_id
 		if top_card == "heckle": return card_id == "double_down" or card_id == "roast"
 		return top_card == "cheer_commoners" and not (card_id == "double_down" or card_id == "roast")
+	
+	if locations[slot.location] == "Stage":
+		if len(slot.contents) == 0: return true
+		var top_card = slot.contents.front().card_id
+		if top_card == "setup": return card_data["type"] == "punchline"
 	
 	return card_id != "roast" and card_id != "double_down" and len(slot.contents) == 0
 
