@@ -162,6 +162,7 @@ func populate_audience():
 		new_card.card_id = "heckle"
 		new_card.interactable = false
 		
+		await get_tree().create_timer(0.25).timeout
 		add_child(new_card)
 		new_card.play_to_slot(slot)
 		
@@ -172,6 +173,7 @@ func populate_audience():
 		new_card.card_id = "offense"
 		new_card.interactable = false
 		
+		await get_tree().create_timer(0.25).timeout
 		add_child(new_card)
 		new_card.play_to_slot(slot)
 
