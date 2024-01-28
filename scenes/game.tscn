@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3ekjjhiqy5iy"]
+[gd_scene load_steps=15 format=3 uid="uid://c3ekjjhiqy5iy"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_gmfm1"]
 [ext_resource type="PackedScene" uid="uid://bnla5m7oa6rcr" path="res://scenes/card_slot.tscn" id="2_3wt2b"]
+[ext_resource type="Texture2D" uid="uid://bk50rqds202a6" path="res://assets/background.png" id="2_6g11p"]
 [ext_resource type="FontFile" uid="uid://c3syvr3xbve25" path="res://assets/Magic Sound.ttf" id="5_2d1mq"]
 [ext_resource type="PackedScene" uid="uid://4txe3eyg25bs" path="res://scenes/sounds.tscn" id="5_2q4lb"]
 [ext_resource type="FontFile" uid="uid://3qnfqecml1m" path="res://assets/Skincake.ttf" id="5_x7nl2"]
@@ -66,6 +67,12 @@ size = Vector2(801, 123.5)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gmfm1")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.513726)
+position = Vector2(576, 324.25)
+scale = Vector2(0.9, 0.905594)
+texture = ExtResource("2_6g11p")
 
 [node name="Stage" type="Node2D" parent="."]
 position = Vector2(578, 366)
