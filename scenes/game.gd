@@ -126,13 +126,13 @@ func precalculate_net_humour() -> int:
 		net_humour += data["effect"]["comedy"]
 	return net_humour
 
-func precalculate_audience_cards() -> int:
-	var num_audience_cards: int = 0
+func precalculate_bad_reactions() -> int:
+	var num_bad_reactions: int = 0
 	for slot in stage_slots + court_slots + commoner_slots:
 		var data = get_slot_data(slot)
 		if not data: continue
-		if data["zone"] == "commoner" or data["zone"] == "court": num_audience_cards += 1
-	return num_audience_cards
+		if data["card_id"] == "heckle" or data["card_id"] == "offense": num_bad_reactions += 1
+	return num_bad_reactions
 
 func animate_humour_bonus(slot: CardSlot) -> void:
 	var top_card: Card = slot.contents.back()
@@ -149,7 +149,8 @@ func handle_common_card_actions(slot: CardSlot, card: Card, data: Variant) -> vo
 	
 	match data["card_id"]:
 		"improv":
-			cards_to_draw = 3
+			if cards_to_draw <= 0: cards_to_draw = 3
+			else: cards_to_draw += 3
 		"prop_humour":
 			humour_bar.value += data["effect"]["comedy"] * (len(hand) - 1)
 			card.update_score_text(data["effect"]["comedy"] * len(hand))
@@ -181,7 +182,7 @@ func handle_common_card_actions(slot: CardSlot, card: Card, data: Variant) -> vo
 			
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
-	var num_audience_cards: int = precalculate_audience_cards()
+	var num_bad_reactions: int = precalculate_bad_reactions()
 	if humour_bar.value + net_humour <= 0: sounds.boo()
 	else:
 		if net_humour < 0:
@@ -195,7 +196,8 @@ func advance_round() -> void:
 	
 		match data["card_id"]:
 			"read_the_room":
-				cards_to_draw = num_audience_cards
+				if cards_to_draw <= 0: cards_to_draw = num_bad_reactions + 1
+				else: cards_to_draw += num_bad_reactions
 			_:
 				handle_common_card_actions(slot, slot.contents.back(), data)
 				
