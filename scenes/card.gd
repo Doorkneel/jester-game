@@ -38,7 +38,7 @@ var interactable: bool = true
 var being_hovered: bool = false
 var being_dragged: bool = false
 var should_return_to_hand: bool = false
-var old_z_index: float = 0
+var old_z_index: int = 0
 
 # Target position & rotation for animation
 var desired_position: Vector2
