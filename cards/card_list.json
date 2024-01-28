@@ -154,14 +154,14 @@
 		"rules_text" : "Decreases favour of target class, \n increases favour of the other",
 		"effect" : {
 			"comedy": 10,
-			"commonerFavour" : 10,
-			"courtFavour" : -10
+			"commonerFavour" : 0,
+			"courtFavour" : 0
 		}
 	},
 	"political_humour" : {
 		"name" : "Politcal Humour",
 		"zone" : "jester",
-		"type" : "misc",
+		"type" : "punchline",
 		"rules_text" : "+15 comedy. \nFavours court",
 		"effect" : {
 			"comedy": 10,
@@ -183,7 +183,7 @@
 	"prop_humour" : {
 		"name" : "Prop Humour",
 		"zone" : "jester",
-		"type" : "misc",
+		"type" : "punchline",
 		"rules_text" : "+10 Comedy for \neach card in hand",
 		"effect" : {
 			"comedy": 10,
