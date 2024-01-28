@@ -64,15 +64,19 @@ volume_db = -4.0
 
 [node name="GaspNeutral" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_jb0go")
+volume_db = 2.0
 
 [node name="GaspSurprise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_iwaic")
+volume_db = 2.0
 
 [node name="GaspWorry" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_0r0ls")
+volume_db = 2.0
 
 [node name="GaspShock" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_xd02u")
+volume_db = 2.0
 
 [node name="Crickets" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_aj6di")

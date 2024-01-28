@@ -35,10 +35,11 @@ var highlighted_slot: CardSlot
 
 # Current interaction
 var interactable: bool = true
+var covered: bool = false
 var being_hovered: bool = false
 var being_dragged: bool = false
 var should_return_to_hand: bool = false
-var old_z_index: float = 0
+var old_z_index: int = 0
 
 # Target position & rotation for animation
 var desired_position: Vector2
@@ -95,14 +96,14 @@ func _process(_delta) -> void:
 	else: rotation += rot_delta * rotation_speed
 
 func _on_mouse_entered() -> void:
-	if interactable: being_hovered = true
+	if interactable and not covered: being_hovered = true
 
 func _on_mouse_exited() -> void:
 	being_hovered = false
 
 func _input(_event) -> void:
 	if Input.is_action_just_pressed("click"):
-		if being_hovered and not card_being_dragged and interactable:
+		if being_hovered and not card_being_dragged and interactable and not covered:
 			being_dragged = true
 			old_z_index = z_index
 			z_index = 1000
@@ -164,13 +165,16 @@ func can_play_to_slot(slot: CardSlot) -> bool:
 
 func play_to_slot(slot: CardSlot) -> void:
 	# remove card from old slot
-	if current_slot: current_slot.contents.pop_back()
+	if current_slot:
+		current_slot.contents.pop_back()
+		if len(current_slot.contents) > 0: current_slot.contents.back().covered = false
 	current_slot = slot
 	
 	if slot:
 		# add card to new slot
 		desired_position = slot.global_position
 		desired_rotation = slot.global_rotation
+		if len(slot.contents) > 0: slot.contents.back().covered = true
 		slot.contents.append(self)
 		z_index = len(slot.contents)
 		card_played_to_slot.emit(self)
