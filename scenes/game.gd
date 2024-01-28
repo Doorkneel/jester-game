@@ -45,7 +45,7 @@ const initial_humour: int = 5
 	"double_down" : 2,
 	"read_the_room" : 3,
 	"gallows_humour" : 3,
-	"naughty_humour" : 3
+	"naughty_joke" : 3
 }
 
 # crowd attitudes (range between -40 and 40)
