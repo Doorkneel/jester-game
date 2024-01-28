@@ -26,5 +26,5 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	slot_hovered.emit(self.get_instance_id(), null)
 
-func show_highlight(visible: bool) -> void:
-	glow.visible = visible
+func show_highlight(enable: bool) -> void:
+	glow.visible = enable
