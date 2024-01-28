@@ -19,7 +19,6 @@ extends Node
 @onready var stage_slots = [$Stage/Stage1, $Stage/Stage2, $Stage/Stage3] as Array[CardSlot]
 @onready var court_slots = [$Court/Court1, $Court/Court2] as Array[CardSlot]
 @onready var commoner_slots = [$Commoners/Commoners1, $Commoners/Commoners2] as Array[CardSlot]
-@onready var king_slot = $King/King as CardSlot
 
 @export var commoner_json: JSON
 @export var court_json: JSON
@@ -56,6 +55,7 @@ var court_attitude: int = 0
 # main game counters
 # (humour level is found in humour_bar.value)
 var rounds_remaining: int = 7
+var current_king: String
 
 # current deck and hand
 var deck: Array[String] = []
@@ -268,7 +268,7 @@ func draw_card() -> void:
 	add_child(new_card)
 	sounds.card_draw()
 
-func populate_audience():
+func populate_audience() -> void:
 	var commoner_card_quality = get_audience_cards("commoner")
 	var court_card_quality = get_audience_cards("court")
 	

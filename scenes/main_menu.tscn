@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi550sv255gv8"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_5ag11"]
+[ext_resource type="FontFile" uid="uid://c3syvr3xbve25" path="res://assets/Magic Sound.ttf" id="2_ala2h"]
+[ext_resource type="Texture2D" uid="uid://bk50rqds202a6" path="res://assets/background.png" id="2_gpgh0"]
+[ext_resource type="FontFile" uid="uid://dlb5n5lppap8j" path="res://assets/Skincake.otf" id="3_5t5wg"]
+[ext_resource type="PackedScene" uid="uid://4txe3eyg25bs" path="res://scenes/sounds.tscn" id="4_8hlrw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w5psy"]
+line_spacing = 15.0
+font_size = 22
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_5ag11")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.486275)
+position = Vector2(576, 324)
+scale = Vector2(0.9, 0.906294)
+texture = ExtResource("2_gpgh0")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 485.0
+offset_top = 406.0
+offset_right = 578.0
+offset_bottom = 465.0
+theme_override_fonts/font = ExtResource("2_ala2h")
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 599.0
+offset_top = 406.0
+offset_right = 687.0
+offset_bottom = 465.0
+theme_override_fonts/font = ExtResource("2_ala2h")
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 345.0
+offset_top = 144.0
+offset_right = 785.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("2_ala2h")
+theme_override_font_sizes/font_size = 45
+text = "Down to Clown"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 185.0
+offset_top = 282.0
+offset_right = 994.0
+offset_bottom = 364.0
+theme_override_fonts/font = ExtResource("3_5t5wg")
+theme_override_font_sizes/font_size = 20
+text = "Generate enough Comedy before the king comes for your head!
+The Commoners and the Court each enjoy different styles of humour."
+label_settings = SubResource("LabelSettings_w5psy")
+horizontal_alignment = 1
+
+[node name="Sounds" parent="." instance=ExtResource("4_8hlrw")]
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
