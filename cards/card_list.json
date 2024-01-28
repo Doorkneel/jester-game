@@ -3,7 +3,7 @@
 		"name": "Cheer",
 		"zone": "commoner",
 		"type" : "status",
-		"rules_text": "You can play on this",
+		"rules_text": "Playable slot",
 		"effect" : {
 			"comedy" : 0,
 			"commonerFavour" : 0,
@@ -15,7 +15,7 @@
 		"name": "Cheer",
 		"zone": "court",
 		"type" : "status",
-		"rules_text": "You can play on this",
+		"rules_text": "Playable slot",
 		"effect" : {
 			"comedy" : 0,
 			"commonerFavour" : 0,
@@ -26,19 +26,19 @@
 	"crowd_work" : {
 		"name" : "Crowd Work",
 		"zone" : "jester",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "+5 Comedy for every card in crowd",
 		"type": "misc",
 		"effect" : {
-			"comedy" : 10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"comedy" : 5,
+			"commonerFavour" : 10,
+			"courtFavour" : 10
 		}
 	},
 	"gallows_humour" : {
 		"name" : "Gallows Humor",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "Coin flip: +20/-20 Comedy",
 		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
@@ -49,11 +49,11 @@
 		"name" : "Heckle",
 		"zone" : "commoner",
 		"type" : "status",
-		"rules_text" : "Remove 5 comedy",
+		"rules_text" : "-15 comedy",
 		"effect" : {
-			"comedy" : -10,
+			"comedy" : -15,
 			"commonerFavour" : 20,
-			"courtFavour" : -10,
+			"courtFavour" : 0,
 			"quality" : "bad"
 		}
 	},
@@ -72,11 +72,11 @@
 		"name" : "Offense",
 		"zone" : "court",
 		"type" : "status",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "-15 comedy",
 		"effect" : {
 			"comedy" : -10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10,
+			"commonerFavour" : 10,
+			"courtFavour" : 0,
 			"quality" : "bad"
 		}
 	},
@@ -84,7 +84,7 @@
 		"name" : "Quip",
 		"zone" : "jester",
 		"type" : "misc",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "+10 comedy",
 		"effect" : {
 			"comedy" : 10,
 			"commonerFavour" : 20,
@@ -95,21 +95,21 @@
 		"name" : "Read the room",
 		"zone" : "jester",
 		"type" : "misc",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "+1 card for  \nevery Heckle/Offense",
 		"effect" : {
-			"comedy" : 10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"comedy" : 0,
+			"commonerFavour" : 10,
+			"courtFavour" : 10
 		}
 	},
 	"roast" : {
 		"name" : "Roast",
 		"zone" : "jester",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "+20 Comedy. \nPlayable on Heckle/Offense",
 		"type" : "misc",
 		"effect" : {
 			"comedy" : 10,
-			"commonerFavour" : 20,
+			"commonerFavour" : 10,
 			"courtFavour" : -10
 		}
 	},
@@ -117,7 +117,7 @@
 		"name" : "Setup",
 		"zone" : "jester",
 		"type" : "setup",
-		"rules_text" : "Play a punchline on this",
+		"rules_text" : "Sets up Punchline. Persists between rounds.",
 		"effect" : {
 			"comedy" : 0,
 			"commonerFavour" : 0,
@@ -128,10 +128,10 @@
 		"name" : "Stage Fright",
 		"zone" : "jester",
 		"type" : "status",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "",
 		"effect" : {
 			"comedy" : 10,
-			"commonerFavour" : 20,
+			"commonerFavour" : -10,
 			"courtFavour" : -10,
 			"quality" : "bad"
 		}
@@ -140,11 +140,55 @@
 		"name" : "Toilet Humour",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "Add 5 comedy",
+		"rules_text" : "+15 comedy. \n Favours commoners.",
 		"effect" : {
-			"comedy" : 10,
+			"comedy" : 15,
 			"commonerFavour" : 20,
+			"courtFavour" : -20
+		}
+	},
+	"double_down" : {
+		"name" : "Double Down",
+		"zone" : "jester",
+		"type" : "misc",
+		"rules_text" : "Decreases favour of target class, \n increases favour of the other",
+		"effect" : {
+			"comedy": 10,
+			"commonerFavour" : 10,
 			"courtFavour" : -10
+		}
+	},
+	"political_humour" : {
+		"name" : "Politcal Humour",
+		"zone" : "jester",
+		"type" : "misc",
+		"rules_text" : "+15 comedy. \nFavours court",
+		"effect" : {
+			"comedy": 10,
+			"commonerFavour" : -20,
+			"courtFavour" : 20
+		}
+	},
+	"improv" : {
+		"name" : "Improv",
+		"zone" : "jester",
+		"type" : "misc",
+		"rules_text" : "+2 Cards",
+		"effect" : {
+			"comedy": 10,
+			"commonerFavour" : 0,
+			"courtFavour" : 0
+		}
+	},
+	"prop_humour" : {
+		"name" : "Prop Humour",
+		"zone" : "jester",
+		"type" : "misc",
+		"rules_text" : "+10 Comedy for \neach card in hand",
+		"effect" : {
+			"comedy": 10,
+			"commonerFavour" : 0,
+			"courtFavour" : 0
 		}
 	},
 }

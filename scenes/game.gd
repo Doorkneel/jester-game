@@ -36,11 +36,17 @@ const initial_humour: int = 5
 # starting cards
 @export var starting_cards = {
 	"quip": 5,
-	"naughty_joke": 3,
 	"setup": 4,
 	"toilet_humour": 2,
-	"crowd_work": 3,
-	"roast": 3
+	"political_humour": 2,
+	"crowd_work": 2,
+	"roast": 3,
+	"prop_humour" : 1,
+	"improv" : 1,
+	"double_down" : 1,
+	"read_the_room" : 1,
+	"gallows_humour" : 1
+	
 }
 
 # crowd attitudes (range between -40 and 40)
