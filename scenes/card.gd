@@ -141,7 +141,3 @@ func play_to_slot(slot: CardSlot) -> void:
 	
 func show_comedy_score():
 	anim.play("score")
-
-
-func _on_animation_player_animation_finished(anim_name):
-	pass # Replace with function body.
