@@ -19,6 +19,20 @@ extends Node
 @onready var play = $Play as AudioStreamPlayer2D
 @onready var booing = $Boo as AudioStreamPlayer2D
 @onready var card = $Card as AudioStreamPlayer2D
+@onready var music = $Music as AudioStreamPlayer2D
+@onready var party = $Party as AudioStreamPlayer2D
+@onready var sad_horn = $SadHorn as AudioStreamPlayer2D
+
+@export var play_music: bool
+@export var play_party: bool
+@export var play_sad_horn: bool
+
+func _ready() -> void:
+	if play_music: music.play()
+	if play_party: party.play()
+	if play_sad_horn:
+		sad_horn.play()
+		boo()
 
 func laugh(magnitude: float) -> void:
 	badumtss.play()

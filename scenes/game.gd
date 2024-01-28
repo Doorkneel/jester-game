@@ -174,9 +174,9 @@ func advance_round() -> void:
 func check_for_win_or_loss() -> void:
 	rounds_remaining -= 1
 	if humour_bar.value >= 100:
-		pass # TODO trigger WIN!
+		pass
 	elif rounds_remaining <= 0 or humour_bar.value <= 0:
-		pass # TODO trigger LOSS!
+		pass
 	else: begin_next_round()
 
 func begin_next_round() -> void:

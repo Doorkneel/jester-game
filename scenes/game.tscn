@@ -183,6 +183,7 @@ position = Vector2(551, 598)
 shape = SubResource("RectangleShape2D_jrlsg")
 
 [node name="Sounds" parent="." instance=ExtResource("5_2q4lb")]
+play_music = true
 
 [connection signal="pressed" from="CanvasLayer/EndRound" to="." method="advance_round"]
 [connection signal="timeout" from="CardDrawTimer" to="." method="_on_card_draw_timer_timeout"]
