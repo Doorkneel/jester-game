@@ -36,7 +36,7 @@ const initial_humour: int = 5
 # starting cards
 @export var starting_cards = {
 	"quip": 5,
-	"setup": 4,
+	"setup": 10,
 	"toilet_humour": 2,
 	"political_humour": 2,
 	"crowd_work": 2,
@@ -45,7 +45,7 @@ const initial_humour: int = 5
 	"improv" : 1,
 	"double_down" : 1,
 	"read_the_room" : 1,
-	"gallows_humour" : 1
+	"gallows_humour" : 10
 	
 }
 
@@ -153,10 +153,11 @@ func handle_common_card_actions(card: Card, data: Variant) -> void:
 		"prop_humour":
 			humour_bar.value += data["effect"]["comedy"] * (len(hand) - 1)
 			card.update_score_text(data["effect"]["comedy"] * len(hand))
-		
-
 		"gallows_humour":
 			humour_bar.value -= data["effect"]["comedy"]
+			var rand_humor = data["effect"]["comedy"] * (2 if randf() > 0.5 else -1)
+			humour_bar.value += rand_humor
+			card.update_score_text(rand_humor)
 			
 func advance_round() -> void:
 	var net_humour: int = precalculate_net_humour()
