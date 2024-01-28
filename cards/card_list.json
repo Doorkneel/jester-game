@@ -38,11 +38,11 @@
 		"name" : "Gallows Humor",
 		"zone" : "jester",
 		"type" : "punchline",
-		"rules_text" : "Coin flip: +20/-20 Comedy",
+		"rules_text" : "Coin flip for +20/-10 Comedy",
 		"effect" : {
 			"comedy" : 10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"commonerFavour" : 10,
+			"courtFavour" : 10
 		}
 	},
 	"heckle" : {
@@ -87,8 +87,8 @@
 		"rules_text" : "+10 comedy",
 		"effect" : {
 			"comedy" : 10,
-			"commonerFavour" : 20,
-			"courtFavour" : -10
+			"commonerFavour" : 0,
+			"courtFavour" : 0
 		}
 	},
 	"read_the_room" : {
@@ -130,7 +130,7 @@
 		"type" : "status",
 		"rules_text" : "",
 		"effect" : {
-			"comedy" : 10,
+			"comedy" : 0,
 			"commonerFavour" : -10,
 			"courtFavour" : -10,
 			"quality" : "bad"

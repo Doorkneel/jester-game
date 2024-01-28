@@ -155,7 +155,15 @@ func handle_common_card_actions(card: Card, data: Variant) -> void:
 			card.update_score_text(data["effect"]["comedy"] * len(hand))
 		"gallows_humour":
 			humour_bar.value -= data["effect"]["comedy"]
-			var rand_humor = data["effect"]["comedy"] * (2 if randf() > 0.5 else -1)
+			var coin = 1 if randf() < 0.5 else -1
+			var rand_humor = data["effect"]["comedy"] * (2 if coin == 1 else -1)
+			
+			commoner_attitude -= data["effect"]["commonerFavour"]
+			court_attitude -= data["effect"]["courtFavour"]
+			
+			commoner_attitude += data["effect"]["commonerFavour"] * coin
+			court_attitude += data["effect"]["courtFavour"] * coin
+			
 			humour_bar.value += rand_humor
 			card.update_score_text(rand_humor)
 			
